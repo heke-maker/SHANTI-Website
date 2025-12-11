@@ -1,0 +1,19 @@
+<h1>ユーザー一覧</h1>
+
+<% @users.each do |user| %>
+  <p><%= user.email %></p>
+  <%= link_to "詳細を見る", user_path(user) %>
+  <hr>
+<% end %>
+
+<% if user_signed_in? %>
+   <% if current_user.admin? %>
+     <% sum = 0 %>
+       <% @users.each do |u| %>
+         <p>メアド:<%= u.email %></p>
+         <p>名前:<%= u.name %>さん</p>
+       <% sum += 1 %>
+     <% end %>
+     <p>登録者合計：<%= sum %></p>
+    <% end %>
+<% end %>
