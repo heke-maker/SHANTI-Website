@@ -1,5 +1,7 @@
 class ActivitiesController < ApplicationController
   def index
+    @volunteer_activities = all_activities 
+    @event_activities = all_activities
   end
 
   def show
