@@ -60,7 +60,7 @@ end
 
 gem 'devise'
 
-gem 'dotenv-rails'
+#gem 'dotenv-rails'
 gem 'carrierwave', '~> 3.0'
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'

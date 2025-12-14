@@ -1,0 +1,38 @@
+<%# app/views/activities/index.html.erb %>
+
+<h1>イベント・活動一覧</h1>
+<div class="activity-container">
+  <h2>【活動内容】</h2>
+
+  <%# 【A】ボランティア活動のセクション - コントローラーで準備された変数を使う %>
+  <section class="activity-category">
+    <h3>〈ボランティア〉</h3>
+    
+    <% @volunteer_activities.each do |activity| %>
+      <div class="activity-item">
+        <h4><%= activity.title %></h4>
+        <p class="activity-description">
+          <%= activity.details %>
+        </p>
+        <%= link_to "詳細を見る", activity_path(activity) %>
+      </div>
+      <hr>
+    <% end %>
+  </section>
+  
+  <%# 【B】イベント活動のセクション - コントローラーで準備された変数を使う %>
+  <section class="activity-category">
+    <h3>〈イベント〉</h3>
+    
+    <% @event_activities.each do |activity| %>
+      <div class="activity-item">
+        <h4><%= activity.title %></h4>
+        <p class="activity-description">
+          <%= activity.details %>
+        </p>
+        <%= link_to "詳細を見る", activity_path(activity) %>
+      </div>
+      <hr>
+    <% end %>
+  </section>
+</div>

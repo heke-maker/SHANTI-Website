@@ -16,4 +16,8 @@ Rails.application.routes.draw do
   resources :tweets do
     resources :likes, only: [:create, :destroy]
   end
+
+  resources :activities
+  get 'team', to: 'pages#team'
+
 end
