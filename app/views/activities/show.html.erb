@@ -1,7 +1,5 @@
 <div class="activity-detail-wrapper">
-<% case params[:id] %>
-
-<% when '1' %>
+<%= case params[:id] when '1' %>
   <h1>三島派遣</h1>
   <p class="category-info">【活動の種類】：ボランティア</p>
   <hr>
@@ -13,7 +11,7 @@
     </p>
   </div>
 
-<% when '2' %>
+<%= when '2' %>
   <h1>チャリティーフットサル</h1>
   <p class="category-info">【活動の種類】：ボランティア</p>
   <hr>
@@ -25,7 +23,7 @@
     </p>
   </div>
 
-<% when '3' %>
+<%= when '3' %>
   <h1>青山祭</h1>
   <p class="category-info">【活動の種類】：イベント</p>
   <hr>
@@ -37,7 +35,7 @@
     </p>
   </div>
 
-<% else %>
+<%= else %>
   <h1>活動が見つかりません</h1>
   <p>指定された活動IDは登録されていません。</p>
 <% end %>
