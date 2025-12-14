@@ -1,11 +1,11 @@
 class ActivitiesController < ApplicationController
   def index
-    @volunteer_activities = all_activities 
-    @event_activities = all_activities
+    @volunteer_activities = [] 
+    @event_activities = []
   end
 
   def show
-    #@activity = Activity.find(params[:id])
+    @activity = Activity.find(params[:id])
   end
 
   def new
