@@ -3,21 +3,118 @@
  *= require_self
  */
 
- .activity-category {
-    margin-top: 30px;
-    padding: 20px;
-    border-left: 5px solid #ffaa00; /* オレンジ色の縦線 */
-    margin-bottom: 40px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.activity-item {
-    padding: 15px;
-    margin: 15px 0;
-    border: 1px solid #e0e0e0; /* 薄いグレーの枠線 */
-    border-radius: 5px;
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333; /* 基本のテキストカラー */
+    background-color: #f7f7f7; /* ボディの背景は薄いグレー */
+    line-height: 1.6;
 }
 
-.activity-item h4 {
-    color: #cc5500; /* 見出しの色 */
-    margin-top: 0;
+/* リンクの装飾解除 */
+a {
+    text-decoration: none;
+    color: inherit; /* リンクの色を親要素から継承 */
+}
+
+/* リストの装飾解除 */
+ul {
+    list-style: none;
+}
+
+/* ==================================== */
+/* 2. カラーパレット (オレンジベース) */
+/* ==================================== */
+
+/* 定義: カスタムプロパティ (変数) としてオレンジ系の色を定義 */
+:root {
+    --color-main: #FF7043;      /* メインカラー: 鮮やかなオレンジ */
+    --color-accent: #FFAB91;    /* アクセントカラー: 明るいコーラル */
+    --color-dark: #BF360C;      /* ダークカラー: 深みのある赤オレンジ (ホバー用) */
+    --color-bg-light: #FFF3E0;  /* ライト背景: 非常に薄いオレンジ */
+    --color-text: #212121;      /* テキストカラー: 濃いグレー */
+}
+
+/* ==================================== */
+/* 3. ヘッダー (header, h1) */
+/* ==================================== */
+
+header {
+    background-color: var(--color-main);
+    color: white; /* ヘッダー内のテキストは白 */
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between; /* 要素を左右に配置 */
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽い影で浮遊感を出す */
+}
+
+header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* ==================================== */
+/* 4. ナビゲーション (header-list, ul, li) */
+/* ==================================== */
+
+.header-list ul {
+    display: flex; /* リストアイテムを横並びにする */
+    gap: 20px; /* アイテム間のスペース */
+}
+
+.header-list li {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* ボタンとリンクの共通スタイル */
+
+.header-list form {
+    /* フォーム自体をインライン要素として扱い、flexコンテナ内の要素として認識させる */
+    display: flex; 
+    align-items: center; /* フォーム内の要素を中央揃え */
+    height: 100%; /* 親要素の高さに合わせる */
+}
+
+/* フォーム内のボタン（button_toの最終出力）にもスタイルを継承させる */
+.header-list form button {
+    /* 既存の .header-list button のスタイルを継承しつつ */
+    display: block; 
+    padding: 8px 15px;
+    border: 2px solid white;
+    border-radius: 5px; 
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+    white-space: nowrap; 
+}
+
+/* ホバーエフェクト */
+.header-list a:hover,
+.header-list button:hover {
+    background-color: white; /* 背景を白に反転 */
+    color: var(--color-main); /* テキストをオレンジに反転 */
+    border-color: white;
+    transform: translateY(-1px); /* 少し上に移動させるエフェクト */
+}
+
+/* ==================================== */
+/* 5. メインコンテンツ領域 (main) */
+/* ==================================== */
+
+main {
+    padding: 40px 30px;
+    max-width: 1200px;
+    margin: 0 auto; /* 中央寄せ */
+    background-color: white; /* メインコンテンツエリアの背景 */
+    min-height: 80vh; /* 最低限の高さを確保 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
