@@ -1,38 +1,56 @@
-<%# app/views/activities/index.html.erb %>
-
 <h1>イベント・活動一覧</h1>
+
 <div class="activity-container">
+
   <h2>【活動内容】</h2>
 
-  <%# 【A】ボランティア活動のセクション - コントローラーで準備された変数を使う %>
   <section class="activity-category">
     <h3>〈ボランティア〉</h3>
+
+    <div class="activity-item">
+      <h4>三島派遣</h4>
+      <p class="activity-description">
+        →静岡県三島市で川の清掃などをする
+      </p>
+      
+      <%= link_to "詳細を見る", "/activities/1" %> 
+    </div>
+    <hr>
     
-    <% @volunteer_activities.each do |activity| %>
-      <div class="activity-item">
-        <h4><%= activity.title %></h4>
-        <p class="activity-description">
-          <%= activity.details %>
-        </p>
-        <%= link_to "詳細を見る", activity_path(activity) %>
-      </div>
-      <hr>
-    <% end %>
+
+    <div class="activity-item">
+      <h4>チャリティーフットサル</h4>
+      <p class="activity-description">
+        →サッカー大会。参加費を募金する
+      </p>
+      <%= link_to "詳細を見る", "/activities/2" %> 
+    </div>
+    <hr>
+    
   </section>
   
-  <%# 【B】イベント活動のセクション - コントローラーで準備された変数を使う %>
+
   <section class="activity-category">
     <h3>〈イベント〉</h3>
     
-    <% @event_activities.each do |activity| %>
-      <div class="activity-item">
-        <h4><%= activity.title %></h4>
-        <p class="activity-description">
-          <%= activity.details %>
-        </p>
-        <%= link_to "詳細を見る", activity_path(activity) %>
-      </div>
-      <hr>
-    <% end %>
+    <div class="activity-item">
+      <h4>青山祭</h4>
+      <p class="activity-description">
+        →1年生主体で行う。毎年お化け屋敷を出店しています。
+      </p>
+      <%= link_to "詳細を見る", "/activities/3" %>
+    </div>
+    <hr>
+
+    <div class="activity-item">
+      <h4>夏合宿</h4>
+      <p class="activity-description">
+        →毎年夏休みにSHANTI係主菜で行っている。
+      </p>
+      <%= link_to "詳細を見る", "/activities/4" %>
+    </div>
+    <hr>
+    
   </section>
+
 </div>
