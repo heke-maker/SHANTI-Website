@@ -1,4 +1,5 @@
-<div class="activity-detail-wrapper"><% case params[:id] %>
+<div class="activity-detail-wrapper">
+<% case params[:id] %>
 <% when '1' %>
   <h1>三島派遣</h1>
   <p class="category-info">【活動の種類】：ボランティア</p>
@@ -39,9 +40,7 @@
   <h1>活動が見つかりません</h1>
   <p>指定された活動IDは登録されていません。</p>
 <% end %>
-
   <div class="action-links">
     <%= link_to "活動一覧に戻る", activities_path %>
   </div>
-
 </div>
