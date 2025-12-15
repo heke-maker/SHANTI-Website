@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  get "homes/index"
   devise_for :users
 
-  root 'tweets#index'
+  root to: 'homes#index'
   
   get "up" => "rails/health#show", as: :rails_health_check
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
@@ -16,5 +17,8 @@ Rails.application.routes.draw do
 
   resources :activities
   get 'team', to: 'pages#team'
+
+  resources :tweets 
+  get 'activities', to: 'tweets#index'
 
 end
