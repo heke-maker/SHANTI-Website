@@ -4,7 +4,7 @@
  */
 
 /* =================================================== */
-/* 0. リセットと基本設定（画面全体をカバー） */
+/* 0. 全体レイアウト（画面いっぱいに広げる） */
 /* =================================================== */
 * {
     box-sizing: border-box;
@@ -12,38 +12,33 @@
     padding: 0;
 }
 
-html, body {
+/* 制限している親要素を無効化 */
+body, html {
     width: 100%;
-    overflow-x: hidden; /* 横揺れ防止 */
+    overflow-x: hidden;
+    background-color: #fff;
 }
 
-body {
-    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Arial, sans-serif;
-    color: #212121;
-    background-color: #ffffff; /* グレーから白に変更し、画面を広く見せる */
-    line-height: 1.6;
-}
-
-:root {
-    --color-main: #FF6B35;
-    --color-accent: #FFDAC1;
-    --color-text: #212121;
-    --color-dark-bg: #333;
+/* Railsの標準 main タグの制限をリセット */
+main {
+    padding: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
 }
 
 /* =================================================== */
-/* 1. HERO SECTION (Five Group風・背景画像あり) */
+/* 1. HERO SECTION（Five Group風の巨大フォントと背景） */
 /* =================================================== */
 #hero-section {
     position: relative;
     height: 100vh;
-    width: 100vw; /* 画面横幅いっぱい */
+    width: 100vw;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* 左寄せ */
-    text-align: left;
+    justify-content: center;
     overflow: hidden;
-    background: var(--color-main); /* 画像読み込み前のフォールバック */
 }
 
 .hero-image-overlay {
@@ -52,8 +47,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* 背景画像：ここにあなたのチーム写真のURLを入れてください */
-    background-image: linear-gradient(rgba(255,107,53,0.4), rgba(255,107,53,0.4)), url('https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=2000&auto=format&fit=crop'); 
+    /* 1. 背景画像：Five Groupのような「人」が主役の写真を使用 */
+    background-image: linear-gradient(rgba(255,107,53,0.3), rgba(255,107,53,0.3)), url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2000&auto=format&fit=crop'); 
     background-size: cover;
     background-position: center;
     z-index: 1;
@@ -64,79 +59,66 @@ body {
     z-index: 2;
     color: white;
     width: 100%;
-    padding-left: 8%; /* 左端の余白 */
+    padding: 0 5%;
 }
 
 .main-catchphrase {
-    font-size: clamp(3rem, 8vw, 6rem); /* 画面サイズに合わせて自動調整 */
+    /* 巨大なフォントで画面を埋める */
+    font-size: clamp(4rem, 12vw, 10rem); 
     font-weight: 900;
-    line-height: 1.1;
-    transform: rotate(-3deg); /* Five Group風の傾き */
-    display: inline-block;
-    background: rgba(255,107,53,0.8); /* 文字の背景に少し色をつけて読みやすく */
-    padding: 10px 20px;
-    margin-bottom: 30px;
-    text-shadow: none; /* モダンに */
+    line-height: 1;
+    text-transform: uppercase;
+    transform: rotate(-3deg); /* 斜めに傾けて躍動感を出す */
+    display: block;
+    text-shadow: 10px 10px 0px rgba(0,0,0,0.1);
 }
 
 .sub-catchphrase {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 40px;
-    background: #333; /* 黒いアクセント */
-    display: table;
-    padding: 5px 15px;
+    background: #000;
+    color: #fff;
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
 }
 
 /* =================================================== */
-/* 2. PHILOSOPHY SECTION (画面いっぱいの白背景) */
+/* 2. PHILOSOPHY SECTION（3枚目の画像も統一） */
 /* =================================================== */
 #philosophy-section {
     width: 100vw;
-    padding: 120px 0; /* 上下余白を多めに */
-    background-color: #ffffff;
+    padding: 150px 0;
+    background: #fff;
 }
 
 .section-container {
-    max-width: 1400px; /* 少し広めに設定 */
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 5%;
+    padding: 0 20px;
 }
 
 .section-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: 3rem;
     font-weight: 900;
     margin-bottom: 80px;
-    position: relative;
-    display: inline-block;
-}
-
-.section-title::before {
-    content: "";
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    width: 110%;
-    height: 20px;
-    background: var(--color-accent);
-    z-index: -1;
-    transform: skewX(-20deg);
+    text-align: center;
 }
 
 .philosophy-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* レスポンシブ */
-    gap: 60px;
-    padding: 20px;
+    /* 1:1:1で均等に並べることで3枚目も統一される */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
 }
 
 .philosophy-item {
     background: #fff;
     padding: 40px;
-    border: none;
-    box-shadow: 15px 15px 0px var(--color-accent); /* 座布団のような影 */
+    /* オレンジの座布団のような装飾 */
+    box-shadow: 20px 20px 0px #FFDAC1;
     transform: rotate(1.5deg);
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 .philosophy-item:nth-child(even) {
@@ -144,62 +126,31 @@ body {
 }
 
 .philosophy-item:hover {
-    transform: rotate(0deg) scale(1.05);
-    box-shadow: 5px 5px 0px var(--color-accent);
+    transform: scale(1.05) rotate(0deg);
 }
 
 /* =================================================== */
-/* 3. CALENDAR SECTION (背景色ありの全幅) */
+/* 3. CALENDAR SECTION（全幅の背景色） */
 /* =================================================== */
 #calendar-section {
     width: 100vw;
-    background-color: var(--color-accent); /* 画面いっぱいに背景色 */
+    background-color: #FFDAC1;
     padding: 100px 0;
-}
-
-.schedule-list {
-    max-width: 1000px;
-    margin: 40px auto;
 }
 
 .schedule-item {
     display: flex;
-    align-items: center;
     background: #fff;
-    padding: 25px;
-    margin-bottom: 20px;
-    border-radius: 0; /* 四角くしてモダンに */
-    transition: 0.3s;
-}
-
-.schedule-item:hover {
-    transform: translateX(10px);
+    margin: 10px auto;
+    max-width: 800px;
+    padding: 30px;
+    /* 直角デザインでモダンに */
+    border-left: 10px solid #FF6B35;
 }
 
 .date-tag {
-    background: var(--color-main);
-    color: #fff;
-    padding: 10px 20px;
+    font-size: 1.5rem;
     font-weight: 900;
+    color: #FF6B35;
     margin-right: 30px;
-}
-
-/* =================================================== */
-/* 4. その他パーツ（ボタンなど） */
-/* =================================================== */
-.btn {
-    padding: 15px 40px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 1rem;
-    border-radius: 0; /* 直角で力強く */
-}
-
-.btn-primary { background: var(--color-main); color: #fff; }
-.btn-secondary { background: #333; color: #fff; border: none; }
-
-footer {
-    background: #212121;
-    color: #fff;
-    padding: 60px 0;
 }
