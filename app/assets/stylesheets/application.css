@@ -193,16 +193,12 @@ main { width: 100%; padding: 0 !important; }
     position: relative;
 }
 
-/* カテゴリー見出しのデザイン */
-.activity-category-section {
-    margin-bottom: 80px;
-}
-
+/* カテゴリー見出し：オレンジに変更 */
 .category-title {
     font-size: 1.2rem;
     font-weight: 900;
     color: #fff;
-    background: #333;
+    background: var(--color-main); /* オレンジに変更 */
     display: inline-block;
     padding: 8px 25px;
     margin-bottom: 35px;
@@ -210,14 +206,12 @@ main { width: 100%; padding: 0 !important; }
     box-shadow: 5px 5px 0px var(--color-accent);
 }
 
-/* グリッド配置の最適化 */
 .activities-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 40px;
 }
 
-/* カード本体のデザイン */
 .activity-card {
     background: #ffffff !important;
     border-radius: 15px;
@@ -231,34 +225,27 @@ main { width: 100%; padding: 0 !important; }
     border: 1px solid #f0f0f0 !important;
 }
 
-/* ホバー時の「浮き上がる」エフェクト */
 .activity-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2) !important;
     border-color: var(--color-main) !important;
 }
 
-/* 画像エリアの比率を固定（16:9） */
 .activity-image-wrapper {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: #eee;
 }
 
 .activity-image-wrapper img {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
 }
 
-.activity-card:hover .activity-image-wrapper img {
-    transform: scale(1.1);
-}
+.activity-card:hover .activity-image-wrapper img { transform: scale(1.1); }
 
-/* テキストコンテンツの余白調整 */
 .activity-content {
     padding: 30px;
     flex-grow: 1;
@@ -266,66 +253,114 @@ main { width: 100%; padding: 0 !important; }
     flex-direction: column;
 }
 
-.activity-number {
-    font-size: 0.8rem;
-    font-weight: 900;
-    color: var(--color-main);
-    margin-bottom: 12px;
-    letter-spacing: 1px;
-}
-
 .activity-title {
     font-size: 1.4rem;
     font-weight: 900;
     margin-bottom: 15px;
-    line-height: 1.4;
     color: var(--color-text);
 }
 
-.activity-description {
-    font-size: 0.95rem;
-    color: #666;
-    line-height: 1.7;
-    margin-bottom: 25px;
-    flex-grow: 1;
-}
-
-/* 「詳細を見る」ボタン風のテキスト */
 .activity-more {
     margin-top: auto;
     font-weight: 900;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
     color: var(--color-main);
-    transition: gap 0.3s;
-}
-
-.activity-card:hover .activity-more {
-    gap: 15px;
 }
 
 /* =================================================== */
-/* 10. 活動詳細ページ */
+/* 10. ACTIVITY SHOW PAGE (活動詳細：整頓・復活版) */
 /* =================================================== */
+
 .activity-detail-container {
-    padding-top: 120px; padding-bottom: 80px;
+    padding-top: 100px;
+    padding-bottom: 100px;
     background: linear-gradient(135deg, var(--color-accent) 0%, #ffffff 100%);
-    min-height: 100vh; position: relative; overflow: hidden;
+    min-height: 100vh;
 }
 
+/* ヒーロー画像エリア */
+.detail-hero {
+    position: relative;
+    height: 50vh;
+    min-height: 400px;
+    margin: 0 5%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.detail-hero-overlay img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+.detail-hero-content {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    z-index: 2;
+    color: white;
+}
+
+.detail-badge {
+    background: var(--color-main);
+    padding: 8px 20px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+/* 白い本文ボックス：位置と影を修正 */
 .detail-main-body {
-    max-width: 900px; margin: -80px auto 0;
-    position: relative; z-index: 10;
-    background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px);
-    padding: 60px 50px; border-radius: 20px;
-    box-shadow: 0 30px 60px rgba(255, 107, 53, 0.15);
+    max-width: 900px;
+    margin: -60px auto 0; /* 画像に少し被せる */
+    position: relative;
+    z-index: 10;
+    background: white;
+    padding: 60px 50px;
+    border-radius: 20px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+}
+
+.detail-sub-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--color-main);
+    border-bottom: 3px solid var(--color-accent);
+    padding-bottom: 10px;
+    margin-bottom: 40px;
 }
 
 .detail-description {
-    white-space: pre-wrap; font-size: 1.15rem; line-height: 2.2;
-    color: #222; background: #ffffff; padding: 35px; border-radius: 12px;
+    white-space: pre-wrap;
+    font-size: 1.1rem;
+    line-height: 2.2;
+    color: #333;
+    background: #fdfdfd;
+    padding: 35px;
+    border-radius: 12px;
+    margin-bottom: 50px;
+    border: 1px solid #f0f0f0;
+}
+
+.detail-actions {
+    text-align: center;
+    border-top: 1px solid #eee;
+    padding-top: 40px;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: var(--color-main);
+    font-weight: 900;
+    border: 2px solid var(--color-main);
+    padding: 12px 40px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: var(--color-main);
+    color: white;
 }
 
 /* =================================================== */
