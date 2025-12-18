@@ -1,32 +1,45 @@
-<h1>SHANTI SHANTI</h1>
-<h3>新規投稿ページ</h3>
-<%= form_for @tweet do |f| %>
+<div class="form-page-container">
+  <div class="form-card">
+    <div class="form-header">
+      <div class="form-badge">POST</div>
+      <h1><%= action_name == 'new' ? '新しいメモを残す' : 'メモを編集する' %></h1>
+      <p>今日の活動や、みんなに伝えたいことを自由に書きましょう！</p>
+    </div>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title, :size => 30 %>
+    <%= form_with(model: @tweet, local: true, class: "styled-form") do |f| %>
+      
+      <div class="field">
+        <%= f.label :title, "タイトル" %>
+        <%= f.text_field :title, placeholder: "例：海岸清掃に参加しました！", class: "form-input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :category, "カテゴリー" %>
+        <%= f.select :category, [["ボランティア", "VOLUNTEER"], ["勉強会", "STUDY"], ["交流会", "EVENT"], ["その他", "OTHER"]], { include_blank: "選択してください" }, { class: "form-select" } %>
+      </div>
+
+      <div class="field">
+        <%= f.label :about, "内容" %>
+        <%= f.text_area :about, rows: 5, placeholder: "活動の感想や詳細を教えてください...", class: "form-textarea" %>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <%= f.label :image, "写真を選択" %>
+          <%= f.file_field :image, class: "form-file" %>
+        </div>
+        
+        <div class="field">
+          <%= f.label :video, "動画のURL" %>
+          <%= f.text_field :video_url, placeholder: "https://...", class: "form-input" %>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit (action_name == 'new' ? "この内容で投稿する" : "更新する"), class: "submit-btn" %>
+        <%= link_to "戻る", tweets_path, class: "cancel-link" %>
+      </div>
+
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :category %>
-    <%= f.text_field :category, :size => 30 %>
-  </div>
-
-  <div class="field">
-    <%= f.label :about  %>
-    <%= f.text_area :about, :size => "30x2" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :image %>
-    <%= f.file_field :image %>
-  </div>
-
-    <%= f.label :video %>
-    <%= f.file_field :video %>
-  </div>
-
-  <%= f.submit "投稿する" %>
-<% end %>
-
-<%= link_to "一覧に戻る", tweets_path %>
+</div>
