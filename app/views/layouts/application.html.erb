@@ -24,29 +24,28 @@
   </head>
 
   <body>
-
-    <header class="main-header">
-      <div class="header-container">
-       <h1 class="logo"><%= link_to "SHANTI", root_path %></h1>
-    
-        <nav class="global-nav">
-          <ul>
-           <li><%= link_to "活動実績", activities_path %></li>
-           <li><%= link_to "入会案内", "/join" %></li>
-           <% if user_signed_in? %>
-           <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-btn" %></li>
-           <% else %>
-           <li><%= link_to "新規登録", new_user_registration_path, class: "nav-btn" %></li>
-           <li><%= link_to "ログイン", new_user_session_path, class: "nav-btn" %></li>
-           <% end %>
-          </ul>
-        </nav>
-      </div>
-    </header>
+  <header class="main-header">
+    <div class="header-container">
+      <h1 class="logo"><%= link_to "SHANTI", root_path %></h1>
+      
+      <nav class="global-nav">
+        <ul>
+          <li><%= link_to "活動実績", activities_path %></li>
+          <li><%= link_to "入会案内", "/join" %></li>
+          <% if user_signed_in? %>
+            <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-btn" %></li>
+          <% else %>
+            <li><%= link_to "新規登録", new_user_registration_path %></li>
+            <li><%= link_to "ログイン", new_user_session_path, class: "nav-btn" %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main>
-   <%= yield %>
+    <%= yield %>
   </main>
- </body>
+</body>
   
 </html>
