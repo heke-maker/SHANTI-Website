@@ -4,7 +4,7 @@
  */
 
 /* =================================================== */
-/* 0. リセットと基本設定 */
+/* 0. リセットと基本設定（画面全体をカバー） */
 /* =================================================== */
 * {
     box-sizing: border-box;
@@ -12,309 +12,194 @@
     padding: 0;
 }
 
-/* リンクとリストの装飾解除 */
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-ul {
-    list-style: none;
-}
-
-/* ==================================== */
-/* 1. カラーパレット & 基本設定 (統合版) */
-/* ==================================== */
-
-/* カスタムプロパティ (変数) としてオレンジ系の色を定義 */
-:root {
-    --color-main: #FF6B35;      /* メインカラー: ヒーローセクション、ボタンの原色 (以前の #FF7043 から統一) */
-    --color-accent: #FFDAC1;    /* ライトオレンジ: 背景色 (以前の #FFAB91 から統一) */
-    --color-text: #212121;      /* テキストカラー: 濃いグレー */
-    --color-dark-bg: #333;      /* フッター背景色 */
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* 横揺れ防止 */
 }
 
 body {
-    /* フォントを Hiragino Sans に統一 */
     font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Arial, sans-serif;
-    color: var(--color-text);
-    background-color: #f7f7f7; /* ボディの背景は薄いグレー */
+    color: #212121;
+    background-color: #ffffff; /* グレーから白に変更し、画面を広く見せる */
     line-height: 1.6;
 }
 
-/* 共通クラス */
-.bg-orange-main { background-color: var(--color-main) !important; color: white; }
-.bg-light-orange { background-color: var(--color-accent); }
-.bg-white { background-color: #ffffff; }
-.text-orange { color: var(--color-main); }
-.section-container {
-    padding: 80px 5%;
-    max-width: 1200px;
-    margin: 0 auto;
+:root {
+    --color-main: #FF6B35;
+    --color-accent: #FFDAC1;
+    --color-text: #212121;
+    --color-dark-bg: #333;
 }
-
-/* ==================================== */
-/* 2. 共通ヘッダー (レイアウトファイル内のオレンジの帯) */
-/* ==================================== */
-
-/* 注意: このスタイルは layouts/application.html.erb の <header> に適用されます。
-   ホームでは条件分岐で非表示にする必要があります。 */
-header {
-    background-color: var(--color-main);
-    color: white; 
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-}
-
-/* ヘッダー内のナビゲーションリスト */
-.header-list ul {
-    display: flex;
-    gap: 20px;
-}
-
-.header-list form button,
-.header-list a {
-    display: inline-block;
-    padding: 8px 15px;
-    border: 2px solid white;
-    border-radius: 5px; 
-    color: white;
-    background-color: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease; 
-    white-space: nowrap;
-}
-
-.header-list form button:hover,
-.header-list a:hover {
-    background-color: white;
-    color: var(--color-main);
-    border-color: white;
-    transform: translateY(-1px);
-}
-
-/* ==================================== */
-/* 3. メインコンテンツ領域 (main) */
-/* ==================================== */
-
-/* 注意: ホーム以外のページでのみ適用される想定 */
-main {
-    padding: 40px 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: white;
-    min-height: 80vh;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-}
-
 
 /* =================================================== */
-/* 4. HERO SECTION (新しいトップページのデザイン) */
+/* 1. HERO SECTION (Five Group風・背景画像あり) */
 /* =================================================== */
-
-/* ボタンのスタイル (デザインパーツ) */
-.btn {
-    display: inline-block;
-    padding: 12px 30px;
-    border-radius: 5px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: opacity 0.3s;
-    margin: 10px;
-}
-.btn-primary {
-    background-color: var(--color-main);
-    color: white;
-    border: 2px solid var(--color-main);
-}
-.btn-secondary {
-    background-color: transparent;
-    color: white; /* ヒーローセクションでは白文字 */
-    border: 2px solid white;
-}
-.btn-primary:hover, .btn-secondary:hover {
-    opacity: 0.8;
-}
-
 #hero-section {
     position: relative;
     height: 100vh;
+    width: 100vw; /* 画面横幅いっぱい */
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start; /* 左寄せ */
+    text-align: left;
     overflow: hidden;
-    z-index: 1;
+    background: var(--color-main); /* 画像読み込み前のフォールバック */
 }
-/* ... (以下、前回提案した Hero Section の詳細スタイルを継続) ... */
+
 .hero-image-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('your_team_photo.jpg'); 
+    /* 背景画像：ここにあなたのチーム写真のURLを入れてください */
+    background-image: linear-gradient(rgba(255,107,53,0.4), rgba(255,107,53,0.4)), url('https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=2000&auto=format&fit=crop'); 
     background-size: cover;
     background-position: center;
-    opacity: 0.8; 
-    z-index: 2;
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 3;
+    z-index: 2;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    padding-left: 8%; /* 左端の余白 */
 }
 
 .main-catchphrase {
-    font-size: 3.5em;
+    font-size: clamp(3rem, 8vw, 6rem); /* 画面サイズに合わせて自動調整 */
     font-weight: 900;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+    line-height: 1.1;
+    transform: rotate(-3deg); /* Five Group風の傾き */
+    display: inline-block;
+    background: rgba(255,107,53,0.8); /* 文字の背景に少し色をつけて読みやすく */
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    text-shadow: none; /* モダンに */
 }
 
 .sub-catchphrase {
-    font-size: 1.2em;
+    font-size: 1.5rem;
+    font-weight: bold;
     margin-bottom: 40px;
+    background: #333; /* 黒いアクセント */
+    display: table;
+    padding: 5px 15px;
 }
 
-
 /* =================================================== */
-/* 5. PHILOSOPHY SECTION (理念・目的) */
+/* 2. PHILOSOPHY SECTION (画面いっぱいの白背景) */
 /* =================================================== */
-
 #philosophy-section {
-    text-align: center;
+    width: 100vw;
+    padding: 120px 0; /* 上下余白を多めに */
+    background-color: #ffffff;
+}
+
+.section-container {
+    max-width: 1400px; /* 少し広めに設定 */
+    margin: 0 auto;
+    padding: 0 5%;
 }
 
 .section-title {
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 50px;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 80px;
+    position: relative;
     display: inline-block;
-    padding-bottom: 5px;
-    border-bottom: 5px dashed var(--color-main); /* カスタム変数を使用 */
+}
+
+.section-title::before {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 110%;
+    height: 20px;
+    background: var(--color-accent);
+    z-index: -1;
+    transform: skewX(-20deg);
 }
 
 .philosophy-grid {
-    display: flex;
-    justify-content: space-around;
-    gap: 30px;
-    margin-bottom: 40px;
-}
-/* ... (以下、理念セクションの詳細スタイルを継続) ... */
-.philosophy-item {
-    flex-basis: 30%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* レスポンシブ */
+    gap: 60px;
     padding: 20px;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s;
+}
+
+.philosophy-item {
+    background: #fff;
+    padding: 40px;
+    border: none;
+    box-shadow: 15px 15px 0px var(--color-accent); /* 座布団のような影 */
+    transform: rotate(1.5deg);
+    transition: all 0.3s ease;
+}
+
+.philosophy-item:nth-child(even) {
+    transform: rotate(-2deg);
 }
 
 .philosophy-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 5px 5px 0px var(--color-accent);
 }
-
-.icon-wrapper {
-    width: 80px;
-    height: 80px;
-    background-color: var(--color-accent); 
-    border-radius: 50%;
-    margin: 0 auto 15px;
-    line-height: 80px;
-    font-size: 1.5em;
-    color: var(--color-main);
-}
-
-.item-title {
-    font-size: 1.3em;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.link-to-activities {
-    color: var(--color-main);
-    font-weight: bold;
-    text-decoration: underline;
-    transition: color 0.3s;
-}
-.link-to-activities:hover {
-    color: var(--color-dark-bg); /* ホバー色 */
-}
-
 
 /* =================================================== */
-/* 6. CALENDAR SECTION (カレンダー/日程) */
+/* 3. CALENDAR SECTION (背景色ありの全幅) */
 /* =================================================== */
-/* ... (カレンダーセクションのスタイルは変更なし) ... */
 #calendar-section {
-    text-align: center;
+    width: 100vw;
+    background-color: var(--color-accent); /* 画面いっぱいに背景色 */
+    padding: 100px 0;
 }
 
 .schedule-list {
-    max-width: 800px;
-    margin: 30px auto;
+    max-width: 1000px;
+    margin: 40px auto;
 }
 
 .schedule-item {
     display: flex;
     align-items: center;
-    background-color: white;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 0; /* 四角くしてモダンに */
+    transition: 0.3s;
+}
+
+.schedule-item:hover {
+    transform: translateX(10px);
 }
 
 .date-tag {
-    display: inline-block;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    margin-right: 20px;
-    font-size: 1.1em;
-}
-
-.event-title {
-    flex-grow: 1;
-    text-align: left;
-    font-size: 1.1em;
-    margin: 0;
-}
-
-.detail-link {
-    color: #4a4a4a;
-    text-decoration: none;
-    font-weight: 500;
-}
-.detail-link:hover {
-    color: var(--color-main);
+    background: var(--color-main);
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: 900;
+    margin-right: 30px;
 }
 
 /* =================================================== */
-/* 7. FOOTER */
+/* 4. その他パーツ（ボタンなど） */
 /* =================================================== */
-#main-footer {
-    padding: 30px 5%;
-    background-color: var(--color-dark-bg);
-    color: white;
-    text-align: center;
-    font-size: 0.9em;
+.btn {
+    padding: 15px 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    border-radius: 0; /* 直角で力強く */
 }
 
-.footer-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 10px;
-}
+.btn-primary { background: var(--color-main); color: #fff; }
+.btn-secondary { background: #333; color: #fff; border: none; }
 
-.footer-nav a:hover {
-    color: var(--color-main);
+footer {
+    background: #212121;
+    color: #fff;
+    padding: 60px 0;
 }
