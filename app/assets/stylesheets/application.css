@@ -163,39 +163,152 @@ main { width: 100%; padding: 0 !important; }
 }
 
 /* =================================================== */
-/* 11. TWEETS SECTION (みんなの声) */
+/* 11. TWEETS SECTION (吹き出しデザイン) */
 /* =================================================== */
-.tweet-card {
-    background: #ffffff; border-radius: 15px; padding: 20px;
-    margin-bottom: 25px; border: 1px solid #eee;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+
+.tweets-timeline-container {
+    padding: 140px 5% 80px;
+    background: linear-gradient(135deg, var(--color-accent) 0%, #ffffff 100%);
+    min-height: 100vh;
 }
 
-.tweet-media { margin-bottom: 15px; border-radius: 10px; overflow: hidden; }
-
-.tweet-video, .tweet-image {
-    width: 100%; max-height: 400px; object-fit: cover; display: block;
+.tweets-header h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin-bottom: 10px;
 }
 
-.tweet-title { font-size: 1.2rem; font-weight: 900; color: var(--color-main); margin-bottom: 10px; }
-
-.tweet-date-footer { font-size: 0.8rem; color: #bbb; text-align: right; margin-top: 15px; border-top: 1px solid #f9f9f9; padding-top: 10px; }
-
-.like-btn { text-decoration: none; color: #888; font-weight: bold; transition: 0.2s; }
-.like-btn:hover { opacity: 0.7; }
-.like-btn i { color: #ff4444; margin-right: 5px; }
-
-.admin-link {
-    display: inline-block; color: #666; text-decoration: none;
-    font-size: 0.8rem; padding: 5px 15px; background: #eee; border-radius: 5px; margin: 10px 0;
+.header-badge {
+    display: inline-block;
+    background: var(--color-main);
+    color: white;
+    padding: 4px 15px;
+    font-weight: 900;
+    border-radius: 50px;
+    margin-bottom: 10px;
 }
 
-/* --- レスポンシブ (スマホ対応) --- */
+/* タイムライン構造 */
+.balloon-timeline {
+    max-width: 800px;
+    margin: 50px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.tweet-wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.tweet-wrapper.reverse {
+    flex-direction: row-reverse;
+}
+
+/* ユーザーアイコン */
+.user-icon-circle {
+    width: 60px;
+    height: 60px;
+    background: var(--color-main);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+    flex-shrink: 0;
+}
+
+/* 吹き出し本体 */
+.tweet-balloon {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    flex-grow: 1;
+    border: 1px solid #f0f0f0;
+}
+
+/* 吹き出しのしっぽ */
+.balloon-tail {
+    position: absolute;
+    top: 20px;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    transform: rotate(45deg);
+    border-left: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.tweet-wrapper.reverse .balloon-tail {
+    left: auto;
+    right: -10px;
+    border-left: none;
+    border-bottom: none;
+    border-right: 1px solid #f0f0f0;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* 吹き出しの中身 */
+.tweet-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.user-name { font-weight: 900; color: #555; }
+.category-tag { font-size: 0.75rem; background: #eee; padding: 2px 10px; border-radius: 4px; }
+
+.tweet-title {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--color-main);
+    margin-bottom: 8px;
+}
+
+.tweet-media img, .tweet-media video {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.tweet-footer {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.like-btn {
+    text-decoration: none;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.like-btn.active i { color: #ff4444; }
+.tweet-actions a {
+    font-size: 0.8rem;
+    color: #888;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+/* スマホ対応 */
 @media (max-width: 768px) {
-    .main-header { padding: 15px 20px; }
-    .logo-link { font-size: 1.5rem; }
-    .activities-grid { grid-template-columns: 1fr; }
-    .detail-main-body { margin: 0; padding: 40px 20px; border-radius: 0; }
-    .detail-description { padding: 20px; font-size: 1rem; }
-    .tweet-card { padding: 15px; }
+    .tweet-wrapper, .tweet-wrapper.reverse {
+        flex-direction: column;
+        align-items: center;
+    }
+    .balloon-tail { display: none; }
 }
