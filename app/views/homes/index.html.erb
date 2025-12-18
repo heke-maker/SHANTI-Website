@@ -13,6 +13,7 @@
 <section id="philosophy-section">
   <div class="section-container">
     <h2 class="section-title">私たちの理念と目的</h2>
+    
     <div class="philosophy-grid">
       <div class="philosophy-item">
         <h3 class="item-title">【目的１】地域社会への貢献</h3>
@@ -27,7 +28,10 @@
         <p class="item-description">誰もがアイデアを持ち寄り、企画から実行まで、主体的に活動できる環境を提供します。</p>
       </div>
     </div>
-    <%= link_to "→ 全ての活動実績を見る", "/activities", class: "link-to-activities" %>
+
+    <div class="philosophy-action">
+      <%= link_to "活動・イベント一覧を見る", activities_path, class: "philosophy-to-activities" %>
+    </div>
   </div>
 </section>
 
@@ -61,6 +65,7 @@
     </div>
   </div>
 </section>
+
 
 <footer id="main-footer">
     <p>&copy; SHANTI 2025. All Rights Reserved.</p>
