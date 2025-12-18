@@ -1,46 +1,55 @@
-<div class="activity-detail-wrapper">
-<% case params[:id] %>
-<% when '1' %>
-  <h1>三島派遣</h1>
-  <p class="category-info">【活動の種類】：ボランティア</p>
-  <hr>
-  <div class="activity-content">
-    <h2>活動詳細</h2>
-    <p class="long-description">
-      静岡県の三島市に派遣に行く。<br>
-      河川の洗浄のための草刈りや、田植えのお手伝いなどをします。
-    </p>
+<div class="activity-detail-container">
+  <%# --- 1. 条件分岐でデータをセット --- %>
+  <% 
+    case params[:id]
+    when '1'
+      title = "三島派遣"
+      category = "VOLUNTEER"
+      image_url = "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1200"
+      description = "静岡県の三島市に派遣に行き、河川の洗浄のための草刈りや、田植えのお手伝いなどをします。"
+    when '2'
+      title = "チャリティーフットサル"
+      category = "VOLUNTEER"
+      image_url = "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200"
+      description = "チャリティーサッカー大会を実施します。参加費を全額寄付し、スポーツを通じて社会貢献を目指します。"
+    when '3'
+      title = "青山祭・相模原祭"
+      category = "EVENT"
+      image_url = "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200"
+      description = "1年生が主体となって作り上げる学園祭です。SHANTIでは毎年恒例の「お化け屋敷」を出展し、来場者を楽しませています。"
+    # 必要に応じて他のIDもここに追加できます
+    else
+      title = "活動が見つかりません"
+      category = "UNKNOWN"
+      image_url = ""
+      description = "指定された活動IDは登録されていません。"
+    end
+  %>
+
+  <%# --- 2. ヒーロー画像エリア --- %>
+  <div class="activity-detail-hero">
+    <% if image_url.present? %>
+      <img src="<%= image_url %>" alt="<%= title %>">
+    <% end %>
   </div>
 
-<% when '2' %>
-  <h1>チャリティーフットサル</h1>
-  <p class="category-info">【活動の種類】：ボランティア</p>
-  <hr>
-  <div class="activity-content">
-    <h2>活動詳細</h2>
-    <p class="long-description">
-      チャリティーサッカー大会を実施します。<br>
-      参加費を全額寄付します。
-    </p>
-  </div>
+  <%# --- 3. メインコンテンツエリア --- %>
+  <div class="activity-detail-body">
+    <div class="detail-category-tag"><%= category %></div>
+    
+    <h1 class="activity-detail-title">
+      <%= title %>
+    </h1>
 
-<% when '3' %>
-  <h1>青山祭</h1>
-  <p class="category-info">【活動の種類】：イベント</p>
-  <hr>
-  <div class="activity-content">
-    <h2>イベント詳細</h2>
-    <p class="long-description">
-      1年生主体の学園祭です。<br>
-      毎年お化け屋敷を出展しています。
-    </p>
-  </div>
+    <div class="activity-detail-text">
+      <h2>活動詳細</h2>
+      <p class="long-description">
+        <%= description %>
+      </p>
+    </div>
 
-<% else %>
-  <h1>活動が見つかりません</h1>
-  <p>指定された活動IDは登録されていません。</p>
-<% end %>
-  <div class="action-links">
-    <%= link_to "活動一覧に戻る", activities_path %>
+    <div class="action-links">
+      <%= link_to "← 活動一覧に戻る", activities_path, class: "back-to-list" %>
+    </div>
   </div>
 </div>

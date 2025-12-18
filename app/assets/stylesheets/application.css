@@ -438,3 +438,80 @@ main {
         grid-template-columns: 1fr;
     }
 }
+
+/* =================================================== */
+/* 10. ACTIVITY SHOW PAGE (活動詳細) */
+/* =================================================== */
+
+.activity-detail-container {
+    padding: 140px 5% 80px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* メイン画像エリア */
+.activity-detail-hero {
+    width: 100%;
+    height: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 50px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.activity-detail-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 記事コンテンツ */
+.activity-detail-body {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.detail-category-tag {
+    display: inline-block;
+    background: var(--color-main);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 3px;
+    font-weight: 900;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+}
+
+.activity-detail-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 30px;
+    border-bottom: 5px solid var(--color-accent);
+    padding-bottom: 10px;
+}
+
+.activity-detail-text {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: #444;
+    white-space: pre-wrap; /* 改行を反映させる */
+}
+
+/* 戻るボタン */
+.back-to-list {
+    display: inline-block;
+    margin-top: 50px;
+    color: var(--color-main);
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid var(--color-main);
+    padding: 10px 30px;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+.back-to-list:hover {
+    background: var(--color-main);
+    color: white;
+}
