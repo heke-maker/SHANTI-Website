@@ -3,104 +3,68 @@
  *= require_self
  */
 
-/* =================================================== */
-/* 0. 全体レイアウト（画面いっぱいに広げる） */
-/* =================================================== */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* --- 基本設定（余白をゼロにして全画面を許可する） --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; overflow-x: hidden; }
 
-/* 制限している親要素を無効化 */
-body, html {
-    width: 100%;
-    overflow-x: hidden;
-    background-color: #fff;
-}
+/* Railsの標準 main タグの幅制限を解除 */
+main { width: 100%; padding: 0 !important; }
 
-/* Rails標準の余白制限を完全に解除 */
-main {
-    padding: 0 !important;
-    max-width: none !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-}
-
-:root {
-    --color-main: #FF6B35;
-    --color-accent: #FFDAC1;
-}
-
-/* =================================================== */
-/* 1. 透過ヘッダー（写真の上に重ねて横並びにする） */
-/* =================================================== */
+/* --- 固定・透過ヘッダー --- */
 .main-header {
-    position: absolute; /* 写真の上に浮かせる */
+    position: fixed; /* 常に画面上部に固定 */
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 10;
-    padding: 20px 5%;
+    z-index: 100;
+    padding: 20px 40px;
     background: transparent; /* 背景を透明にする */
 }
 
-.header-container {
+.header-inner {
     display: flex;
-    justify-content: space-between; /* ロゴとメニューを両端に */
+    justify-content: space-between; /* 左上にロゴ、右上にボタンを配置 */
     align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
 }
 
 .logo a {
-    font-size: 1.8rem;
-    font-weight: 900;
     color: #fff;
-    letter-spacing: 2px;
+    font-size: 2rem;
+    font-weight: 900;
     text-decoration: none;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-.global-nav ul {
+.auth-nav ul {
     display: flex;
-    align-items: center;
-    gap: 30px;
     list-style: none;
+    gap: 20px;
+    align-items: center;
 }
 
-.global-nav a, .nav-btn {
+.nav-link {
     color: #fff;
     font-weight: bold;
-    font-size: 0.9rem;
     text-decoration: none;
-    transition: 0.3s;
+    font-size: 0.9rem;
 }
 
-/* ログイン・新規登録ボタン */
-.nav-btn {
-    background: var(--color-main);
+.login-btn, .nav-btn {
+    background: #FF6B35; /* オレンジ色 */
+    color: white !important;
     padding: 10px 25px;
+    border-radius: 50px;
     border: none;
-    border-radius: 0; /* 直角デザイン */
     cursor: pointer;
 }
 
-.nav-btn:hover {
-    background-color: #fff;
-    color: var(--color-main);
-}
-
-/* =================================================== */
-/* 2. HERO SECTION（背景写真の切れを防止） */
-/* =================================================== */
+/* --- 全画面ヒーローセクション（写真） --- */
 #hero-section {
     position: relative;
-    width: 100%;
-    height: 100vh; /* 画面の高さ100%を強制 */
-    min-height: 600px;
+    width: 100vw;
+    height: 100vh; /* 画面いっぱいに広げる */
+    background-color: #FF6B35;
     overflow: hidden;
-    display: flex;
-    align-items: center;
 }
 
 .hero-image-overlay {
@@ -109,64 +73,26 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    /* linear-gradientを調整して写真を見えやすく */
-    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+    /* 🔴 背景写真の設定 🔴 */
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
                       url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2000&auto=format&fit=crop'); 
     background-size: cover;
     background-position: center;
-    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2; /* 写真より上、ヘッダーより下 */
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10%;
     color: white;
-    width: 100%;
-    padding: 0 8%;
 }
 
 .main-catchphrase {
-    font-size: clamp(3rem, 10vw, 8rem); 
-    font-weight: 900;
-    line-height: 1;
-    transform: rotate(-3deg); /* Five Group風の傾き */
-    display: inline-block;
-}
-
-.sub-catchphrase {
-    font-size: 1.5rem;
+    font-size: clamp(3rem, 8vw, 6rem);
     font-weight: bold;
-    background: #000;
-    color: #fff;
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 20px;
-}
-
-/* =================================================== */
-/* 3. PHILOSOPHY & CALENDAR (全幅デザインの維持) */
-/* =================================================== */
-#philosophy-section {
-    width: 100vw;
-    padding: 120px 0;
-    background: #fff;
-}
-
-.philosophy-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-}
-
-.philosophy-item {
-    background: #fff;
-    padding: 40px;
-    box-shadow: 20px 20px 0px var(--color-accent);
-    transform: rotate(1.5deg);
-}
-
-#calendar-section {
-    width: 100vw;
-    background-color: var(--color-accent);
-    padding: 100px 0;
+    margin-bottom: 20px;
 }
