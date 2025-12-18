@@ -1,50 +1,33 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <title><%= content_for(:title) || "Shanti" %></title>
+    <title>SHANTI</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <script src="https://kit.fontawesome.com/c6b595c1a3.js" crossorigin="anonymous"></script>
-
-    <%= yield :head %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-
-    <link rel="manifest" href="/manifest.json"/>
-    <link rel="icon" href="/icon.png" type="image/png"/>
-    <link rel="icon" href="/icon.svg" type="image/svg+xml"/>
-    <link rel="apple-touch-icon" href="/icon.png"/>
-    <link rel="icon" href="/icon.png"/>
-
-    
   </head>
 
-  
   <body>
-  <header class="main-header">
-    <div class="header-inner">
-      <h1 class="logo"><%= link_to "SHANTI", root_path, class: "logo-link" %></h1>
-      
-      <nav class="auth-nav">
-        <ul>
-          <% if user_signed_in? %>
-            <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-btn" %></li>
-          <% else %>
-            <li><%= link_to "新規登録", new_user_registration_path, class: "nav-btn registration-btn" %></li>
-            <li><%= link_to "ログイン", new_user_session_path, class: "nav-btn login-btn" %></li>
-          <% end %>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <header class="main-header">
+      <div class="header-inner">
+        <h1 class="logo"><%= link_to "SHANTI", root_path, class: "logo-link" %></h1>
+        
+        <nav class="auth-nav">
+          <ul>
+            <% if user_signed_in? %>
+              <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-btn" %></li>
+            <% else %>
+              <li><%= link_to "新規登録", new_user_registration_path, class: "nav-btn" %></li>
+              <li><%= link_to "ログイン", new_user_session_path, class: "nav-btn" %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-  <main>
-    <%= yield %>
-  </main>
-</body>
-  
+    <main>
+      <%= yield %>
+    </main>
+  </body>
 </html>
