@@ -1,56 +1,75 @@
-<h1>イベント・活動一覧</h1>
+<div class="activities-container">
+  <div class="activities-header">
+    <h1>EVENT & ACTIVITIES</h1>
+    <p>SHANTIの活動・イベント一覧</p>
+  </div>
 
-<div class="activity-container">
-
-  <h2>【活動内容】</h2>
-
-  <section class="activity-category">
-    <h3>〈ボランティア〉</h3>
-
-    <div class="activity-item">
-      <h4>三島派遣</h4>
-      <p class="activity-description">
-        →静岡県三島市で川の清掃などをする
-      </p>
+  <%# --- ボランティアセクション --- %>
+  <section class="activity-category-section">
+    <div class="category-title">VOLUNTEER</div>
+    <div class="activities-grid">
       
-      <%= link_to "詳細を見る", "/activities/1" %> 
-    </div>
-    <hr>
-    
+      <%# カード1: 三島派遣 %>
+      <%= link_to activity_path(1), class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <%# ここに活動写真があれば画像タグ、なければダミー画像 %>
+          <img src="https://images.unsplash.com/photo-1559027615-cd9d7a93034c?q=80&w=800" alt="三島派遣">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">001 / VOLUNTEER</div>
+          <h2 class="activity-title">三島派遣</h2>
+          <p class="activity-description">静岡県三島市で川の清掃などを行う地域貢献活動です。自然と触れ合いながら仲間との絆を深めます。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
 
-    <div class="activity-item">
-      <h4>チャリティーフットサル</h4>
-      <p class="activity-description">
-        →サッカー大会。参加費を募金する
-      </p>
-      <%= link_to "詳細を見る", "/activities/2" %> 
-    </div>
-    <hr>
-    
-  </section>
-  
+      <%# カード2: チャリティーフットサル %>
+      <%= link_to activity_path(2), class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800" alt="チャリティーフットサル">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">002 / VOLUNTEER</div>
+          <h2 class="activity-title">チャリティーフットサル</h2>
+          <p class="activity-description">サッカー大会を通じて参加費を募金するスポーツイベントです。初心者も大歓迎！</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
 
-  <section class="activity-category">
-    <h3>〈イベント〉</h3>
-    
-    <div class="activity-item">
-      <h4>青山祭</h4>
-      <p class="activity-description">
-        →1年生主体で行う。毎年お化け屋敷を出店しています。
-      </p>
-      <%= link_to "詳細を見る", "/activities/3" %>
     </div>
-    <hr>
-
-    <div class="activity-item">
-      <h4>夏合宿</h4>
-      <p class="activity-description">
-        →毎年夏休みにSHANTI係主菜で行っている。
-      </p>
-      <%= link_to "詳細を見る", "/activities/4" %>
-    </div>
-    <hr>
-    
   </section>
 
+  <%# --- イベントセクション --- %>
+  <section class="activity-category-section">
+    <div class="category-title">EVENTS</div>
+    <div class="activities-grid">
+      
+      <%# カード3: 青山祭 %>
+      <%= link_to activity_path(3), class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800" alt="青山祭">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">003 / EVENT</div>
+          <h2 class="activity-title">青山祭</h2>
+          <p class="activity-description">1年生が主体となって行う学園祭。SHANTI恒例のお化け屋敷を出店し、大盛り上がりを見せます。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+      <%# カード4: 夏合宿 %>
+      <%= link_to activity_path(4), class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?q=80&w=800" alt="夏合宿">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">004 / EVENT</div>
+          <h2 class="activity-title">夏合宿</h2>
+          <p class="activity-description">毎年夏休みに開催されるSHANTI最大のイベント。海やBBQなど、一生の思い出を作ります。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+    </div>
+  </section>
 </div>
