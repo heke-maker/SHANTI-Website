@@ -59,6 +59,20 @@ main {
     text-shadow: 2px 2px 10px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.4);
 }
 
+/* --- ここから修正：黒い点を消すための設定 --- */
+.auth-nav ul { 
+    display: flex; 
+    list-style: none; /* リストの「・」を消す */
+    margin: 0; 
+    padding: 0; 
+    gap: 15px; 
+}
+
+.auth-nav li {
+    list-style: none; /* 念のためliタグ側でも点を消す設定を強化 */
+}
+/* --- ここまで --- */
+
 .nav-btn {
     background: var(--color-main) !important;
     color: white !important;
