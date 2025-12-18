@@ -4,11 +4,13 @@
     <p>SHANTIの活動・イベント一覧</p>
   </div>
 
-  <%# --- ボランティアセクション --- %>
+  <%# =================================================== %>
+  <%# 1. ボランティアセクション %>
+  <%# =================================================== %>
   <section class="activity-category-section">
     <div class="category-title">VOLUNTEER</div>
     <div class="activities-grid">
-      
+
       <%# 001: 海外住居建築ボランティア %>
       <%= link_to activity_path(4), class: "activity-card" do %>
         <div class="activity-image-wrapper">
@@ -64,7 +66,7 @@
       <%# 005: ごみ拾い %>
       <%= link_to activity_path(4), class: "activity-card" do %>
         <div class="activity-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?q=80&w=800">
+          <img src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?q=80&w=800" alt="Cleanup">
         </div>
         <div class="activity-content">
           <div class="activity-number">005 / VOLUNTEER</div>
@@ -116,11 +118,13 @@
     </div>
   </section>
 
-  <%# --- イベントセクション --- %>
+  <%# =================================================== %>
+  <%# 2. イベントセクション %>
+  <%# =================================================== %>
   <section class="activity-category-section">
     <div class="category-title">EVENTS</div>
     <div class="activities-grid">
-      
+
       <%# 009: 夏合宿・冬合宿 %>
       <%= link_to activity_path(4), class: "activity-card" do %>
         <div class="activity-image-wrapper">

@@ -183,24 +183,127 @@ main { width: 100%; padding: 0 !important; }
 }
 
 /* =================================================== */
-/* 9. 活動一覧 */
+/* 9. ACTIVITIES SECTION (活動一覧：整頓・復活版) */
 /* =================================================== */
+
 .activities-container {
     padding: 140px 5% 80px;
     background: linear-gradient(135deg, #ffffff 0%, var(--color-accent) 50%, #ffffff 100%);
-    min-height: 100vh; position: relative; overflow: hidden;
+    min-height: 100vh;
+    position: relative;
 }
 
-.activities-container::before {
-    content: "ACTIVITIES"; position: absolute;
-    top: 100px; left: -20px; font-size: 10rem;
-    font-weight: 900; color: rgba(255, 107, 53, 0.03); transform: rotate(-5deg);
+/* カテゴリー見出しのデザイン */
+.activity-category-section {
+    margin-bottom: 80px;
 }
 
+.category-title {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #fff;
+    background: #333;
+    display: inline-block;
+    padding: 8px 25px;
+    margin-bottom: 35px;
+    transform: skewX(-15deg);
+    box-shadow: 5px 5px 0px var(--color-accent);
+}
+
+/* グリッド配置の最適化 */
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px;
+}
+
+/* カード本体のデザイン */
 .activity-card {
-    background: #ffffff !important; border: none !important;
-    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.1) !important;
-    display: flex; flex-direction: column; text-decoration: none !important; color: inherit !important;
+    background: #ffffff !important;
+    border-radius: 15px;
+    overflow: hidden;
+    text-decoration: none !important;
+    color: inherit !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #f0f0f0 !important;
+}
+
+/* ホバー時の「浮き上がる」エフェクト */
+.activity-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2) !important;
+    border-color: var(--color-main) !important;
+}
+
+/* 画像エリアの比率を固定（16:9） */
+.activity-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #eee;
+}
+
+.activity-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.activity-card:hover .activity-image-wrapper img {
+    transform: scale(1.1);
+}
+
+/* テキストコンテンツの余白調整 */
+.activity-content {
+    padding: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-number {
+    font-size: 0.8rem;
+    font-weight: 900;
+    color: var(--color-main);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.activity-title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    color: var(--color-text);
+}
+
+.activity-description {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+/* 「詳細を見る」ボタン風のテキスト */
+.activity-more {
+    margin-top: auto;
+    font-weight: 900;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-main);
+    transition: gap 0.3s;
+}
+
+.activity-card:hover .activity-more {
+    gap: 15px;
 }
 
 /* =================================================== */
