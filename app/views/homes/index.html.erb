@@ -41,30 +41,22 @@
 <section id="calendar-section">
   <div class="section-container">
     <h2 class="section-title">SCHEDULE</h2>
-    <div class="schedule-table">
-      <div class="schedule-row header">
-        <div class="col date">DATE</div>
-        <div class="col event">EVENT</div>
-        <div class="col link">DETAIL</div>
-      </div>
-      
-      <div class="schedule-row">
-        <div class="col date">10/25</div>
-        <div class="col event">秋のチャリティーフットサル大会</div>
-        <div class="col link"><a href="/events/futsal" class="arrow-link">→</a></div>
-      </div>
+    
+    <div class="calendar-card">
+      <%# カレンダー本体の呼び出し %>
+      <%= month_calendar events: @blogs do |date, blogs| %>
+        <div class="calendar-day-num"><%= date.day %></div>
 
-      <div class="schedule-row">
-        <div class="col date">11/10</div>
-        <div class="col event">三島派遣説明会（学内限定）</div>
-        <div class="col link"><a href="/events/mishima" class="arrow-link">→</a></div>
-      </div>
+        <% blogs.each do |blog| %>
+          <div class="calendar-event-item">
+            <%= link_to blog.title, blog, class: "calendar-event-link" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
 
-      <div class="schedule-row">
-        <div class="col date">12/01</div>
-        <div class="col event">新メンバー向け歓迎会</div>
-        <div class="col link"><a href="/events/welcome" class="arrow-link">→</a></div>
-      </div>
+    <div class="calendar-actions">
+      <%= link_to '+ 予定を追加する', new_blog_path, class: "calendar-add-btn" %>
     </div>
   </div>
 </section>
