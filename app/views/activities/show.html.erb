@@ -1,55 +1,56 @@
 <div class="activity-detail-container">
-  <%# --- 1. 条件分岐でデータをセット --- %>
+  <%# --- 1. IDに応じたデータのセット --- %>
   <% 
     case params[:id]
     when '1'
       title = "三島派遣"
       category = "VOLUNTEER"
       image_url = "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1200"
-      description = "静岡県の三島市に派遣に行き、河川の洗浄のための草刈りや、田植えのお手伝いなどをします。"
+      description = "静岡県の三島市に派遣に行き、河川の洗浄のための草刈りや、田植えのお手伝いなどをします。自然豊かな環境での活動を通じて、地域社会への貢献とメンバー間の深い交流を目的としています。"
     when '2'
       title = "チャリティーフットサル"
       category = "VOLUNTEER"
       image_url = "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200"
-      description = "チャリティーサッカー大会を実施します。参加費を全額寄付し、スポーツを通じて社会貢献を目指します。"
+      description = "スポーツを楽しみながら社会に貢献！チャリティーサッカー大会を実施し、その参加費を全額寄付しています。初心者から経験者まで、SHANTIのメンバー全員で汗を流す大人気イベントです。"
     when '3'
-      title = "青山祭・相模原祭"
+      title = "青山祭"
       category = "EVENT"
       image_url = "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200"
-      description = "1年生が主体となって作り上げる学園祭です。SHANTIでは毎年恒例の「お化け屋敷」を出展し、来場者を楽しませています。"
-    # 必要に応じて他のIDもここに追加できます
+      description = "1年生が主体となって企画・運営を行う学園祭。毎年恒例の「お化け屋敷」は学内でも評判で、チーム一丸となって最高のエンターテインメントを作り上げます。"
+    # ※ ID 4〜14 も同様に when '4' ... として追加可能です
     else
-      title = "活動が見つかりません"
-      category = "UNKNOWN"
-      image_url = ""
-      description = "指定された活動IDは登録されていません。"
+      title = "その他の活動"
+      category = "ACTIVITY"
+      image_url = "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200"
+      description = "SHANTIでは他にも多種多様なボランティアやイベントを行っています。詳細はメンバーまでお問い合わせください。"
     end
   %>
 
-  <%# --- 2. ヒーロー画像エリア --- %>
-  <div class="activity-detail-hero">
-    <% if image_url.present? %>
+  <%# --- 2. ヒーローエリア（大きな写真とタイトル） --- %>
+  <div class="detail-hero">
+    <div class="detail-hero-overlay">
       <img src="<%= image_url %>" alt="<%= title %>">
-    <% end %>
+    </div>
+    <div class="detail-hero-content">
+      <div class="detail-badge"><%= category %></div>
+      <h1 class="detail-main-title"><%= title %></h1>
+    </div>
   </div>
 
-  <%# --- 3. メインコンテンツエリア --- %>
-  <div class="activity-detail-body">
-    <div class="detail-category-tag"><%= category %></div>
-    
-    <h1 class="activity-detail-title">
-      <%= title %>
-    </h1>
-
-    <div class="activity-detail-text">
-      <h2>活動詳細</h2>
-      <p class="long-description">
+  <%# --- 3. メインコンテンツ（文章） --- %>
+  <div class="detail-main-body">
+    <div class="detail-section">
+      <h2 class="detail-sub-title">活動詳細</h2>
+      <p class="detail-description">
         <%= description %>
       </p>
     </div>
 
-    <div class="action-links">
-      <%= link_to "← 活動一覧に戻る", activities_path, class: "back-to-list" %>
+    <%# --- 4. アクションボタン --- %>
+    <div class="detail-actions">
+      <%= link_to activities_path, class: "back-btn" do %>
+        <span>←</span> 活動一覧に戻る
+      <% end %>
     </div>
   </div>
 </div>
