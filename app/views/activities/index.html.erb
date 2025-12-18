@@ -9,29 +9,106 @@
     <div class="category-title">VOLUNTEER</div>
     <div class="activities-grid">
       
-      <%# カード1: 三島派遣 %>
-      <%= link_to activity_path(1), class: "activity-card" do %>
+      <%# 001: 海外住居建築ボランティア %>
+      <%= link_to "#", class: "activity-card" do %>
         <div class="activity-image-wrapper">
-          <%# ここに活動写真があれば画像タグ、なければダミー画像 %>
-          <img src="https://images.unsplash.com/photo-1559027615-cd9d7a93034c?q=80&w=800" alt="三島派遣">
+          <img src="https://images.unsplash.com/photo-1504159506876-f8338247a14a?q=80&w=800" alt="Global Village">
         </div>
         <div class="activity-content">
           <div class="activity-number">001 / VOLUNTEER</div>
-          <h2 class="activity-title">三島派遣</h2>
-          <p class="activity-description">静岡県三島市で川の清掃などを行う地域貢献活動です。自然と触れ合いながら仲間との絆を深めます。</p>
+          <h2 class="activity-title">海外住居建築 (Global Village)</h2>
+          <p class="activity-description">海外の居住環境を改善するため、現地の人々と共に家を建てるSHANTIの代表的な活動です。</p>
           <div class="activity-more">詳細を見る <span>→</span></div>
         </div>
       <% end %>
 
-      <%# カード2: チャリティーフットサル %>
-      <%= link_to activity_path(2), class: "activity-card" do %>
+      <%# 002: 国内派遣ボランティア %>
+      <%= link_to "#", class: "activity-card" do %>
         <div class="activity-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800" alt="チャリティーフットサル">
+          <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800" alt="Japan connect">
         </div>
         <div class="activity-content">
           <div class="activity-number">002 / VOLUNTEER</div>
-          <h2 class="activity-title">チャリティーフットサル</h2>
-          <p class="activity-description">サッカー大会を通じて参加費を募金するスポーツイベントです。初心者も大歓迎！</p>
+          <h2 class="activity-title">国内派遣 (Japan connect)</h2>
+          <p class="activity-description">日本国内の様々な地域へ赴き、地域のニーズに合わせた支援活動を展開します。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+      <%# 003: チーム活動 %>
+      <%= link_to "#", class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800" alt="Team Activity">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">003 / VOLUNTEER</div>
+          <h2 class="activity-title">チーム活動(長期派遣なし)</h2>
+          <p class="activity-description">学内や近隣地域で、短期間でも参加可能なプロジェクトベースの活動を行います。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+      <%# 004: 援農 %>
+      <%= link_to "#", class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=800" alt="Agriculture">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">004 / VOLUNTEER</div>
+          <h2 class="activity-title">援農</h2>
+          <p class="activity-description">農家さんの作業をお手伝い。食の背景を学びながら、土に触れる貴重な体験です。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+      <%# 005: ごみ拾い %>
+      <%= link_to "#", class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1618477471363-f201c9a23639?q=80&w=800" alt="Cleanup">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">005 / VOLUNTEER</div>
+          <h2 class="activity-title">ごみ拾い</h2>
+          <p class="activity-description">街を綺麗に。日常的に行える最も身近な社会貢献活動のひとつです。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+      <%# 006: 留学生交流会 %>
+      <%= link_to "#", class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800" alt="Exchange">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">006 / VOLUNTEER</div>
+          <h2 class="activity-title">留学生交流会</h2>
+          <p class="activity-description">学内の留学生と交流。文化の壁を越えた繋がりを作るイベントです。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+      <%# 007: 国内派遣(三島・福島) %>
+      <%= link_to "#", class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1493962853295-0fd70327578a?q=80&w=800" alt="Mishima/Fukushima">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">007 / VOLUNTEER</div>
+          <h2 class="activity-title">国内派遣(三島・福島)</h2>
+          <p class="activity-description">三島や福島での地域支援。震災復興や自然保護など、現地に寄り添う活動です。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+      <%# 008: チャリティフットサル %>
+      <%= link_to "#", class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800" alt="Futsal">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">008 / VOLUNTEER</div>
+          <h2 class="activity-title">チャリティフットサル</h2>
+          <p class="activity-description">スポーツを通じて募金活動。楽しみながら支援の輪を広げます。</p>
           <div class="activity-more">詳細を見る <span>→</span></div>
         </div>
       <% end %>
@@ -44,28 +121,80 @@
     <div class="category-title">EVENTS</div>
     <div class="activities-grid">
       
-      <%# カード3: 青山祭 %>
-      <%= link_to activity_path(3), class: "activity-card" do %>
+      <%# 009: 夏合宿・冬合宿 %>
+      <%= link_to "#", class: "activity-card" do %>
         <div class="activity-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800" alt="青山祭">
+          <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=800" alt="Camp">
         </div>
         <div class="activity-content">
-          <div class="activity-number">003 / EVENT</div>
-          <h2 class="activity-title">青山祭</h2>
-          <p class="activity-description">1年生が主体となって行う学園祭。SHANTI恒例のお化け屋敷を出店し、大盛り上がりを見せます。</p>
+          <div class="activity-number">009 / EVENT</div>
+          <h2 class="activity-title">夏合宿、冬合宿</h2>
+          <p class="activity-description">メンバーとの絆を深める長期合宿。SHANTI生活の中で最も思い出深いイベントです。</p>
           <div class="activity-more">詳細を見る <span>→</span></div>
         </div>
       <% end %>
 
-      <%# カード4: 夏合宿 %>
-      <%= link_to activity_path(4), class: "activity-card" do %>
+      <%# 010: ハロウィン %>
+      <%= link_to "#", class: "activity-card" do %>
         <div class="activity-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?q=80&w=800" alt="夏合宿">
+          <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=800" alt="Halloween">
         </div>
         <div class="activity-content">
-          <div class="activity-number">004 / EVENT</div>
-          <h2 class="activity-title">夏合宿</h2>
-          <p class="activity-description">毎年夏休みに開催されるSHANTI最大のイベント。海やBBQなど、一生の思い出を作ります。</p>
+          <div class="activity-number">011 / EVENT</div>
+          <h2 class="activity-title">ゴミハロ (ハロウィン清掃)</h2>
+          <p class="activity-description">仮装を楽しみながら街を掃除。イベント後こそ綺麗にするのがSHANTI流。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+      <%# 011: 他大交流 %>
+      <%= link_to "#", class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800" alt="Hiking">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">011 / EVENT</div>
+          <h2 class="activity-title">他大交流 (高尾山企画)</h2>
+          <p class="activity-description">インカレならではの交流。他大学の仲間と一緒に高尾山に登ります。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+      <%# 012: 新歓 %>
+      <%= link_to "#", class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800" alt="Welcome">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">012 / EVENT</div>
+          <h2 class="activity-title">新歓イベント</h2>
+          <p class="activity-description">新しい仲間を迎える大切な時期。SHANTIの魅力を最大限に伝えます。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+      <%# 013: 青山祭・相模原祭 %>
+      <%= link_to "#", class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800" alt="Festival">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">013 / EVENT</div>
+          <h2 class="activity-title">青山祭・相模原祭</h2>
+          <p class="activity-description">学園祭への出店。チーム一丸となって企画・運営し、祭りを盛り上げます。</p>
+          <div class="activity-more">詳細を見る <span>→</span></div>
+        </div>
+      <% end %>
+
+      <%# 014: 写真旅行 %>
+      <%= link_to "#", class: "activity-card" do %>
+        <div class="activity-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800" alt="Photo Trip">
+        </div>
+        <div class="activity-content">
+          <div class="activity-number">014 / EVENT</div>
+          <h2 class="activity-title">写真旅行</h2>
+          <p class="activity-description">素敵な景色を求めて旅に出ます。思い出を形に残す人気の企画です。</p>
           <div class="activity-more">詳細を見る <span>→</span></div>
         </div>
       <% end %>
