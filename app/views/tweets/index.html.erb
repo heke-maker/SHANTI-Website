@@ -1,57 +1,86 @@
-<h1>SHNATISAHNTI</h1>
-<h3>一覧ページ</h3>
+<div class="tweets-timeline-container">
+  <%# --- 1. ヘッダーエリア --- %>
+  <div class="tweets-header">
+    <h1>COMMUNITY BOARD <span>- みんなの活動メモ -</span></h1>
+    <p>日々の活動の様子や、参加した感想をシェアしよう！</p>
+    <%= link_to '新しく投稿する', new_tweet_path, class: "new-post-btn" %>
+  </div>
 
-<h3>投稿を検索</h3>
- <%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
-   <%= text_field_tag :search %>
-   <%= submit_tag '検索する'  %>
-<% end %>
-
-<%= link_to "新規投稿へ", new_tweet_path %>
-<div class="tweets-container">
-  <% @tweets.each do |t| %>
-    <div class="tweet">
-      <%=  video_tag t.video_url ,:controls => true if t.video?%>
-
-      <% if t.image.attached? %>
-         <%= image_tag t.image, size: '250x200'%>
-      <% end %>
-
-      <%= t.title %>
-      <%= t.about %>
-      
-    <% if user_signed_in? %>
-      <% if current_user.already_liked?(t) %>
-          <%= link_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete do %>
-             <i class="fa-solid fa-heart"></i><%= t.likes.count %>
-          <% end %>
-      <% else %>
-          <%= link_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post do %>
-             <i class="fa-solid fa-heart"></i><%= t.likes.count %>
-          <% end %>
-      <% end %>
-
-      <% if current_user.id == t.user_id %>
-        <%= link_to "編集する", edit_tweet_path(t.id) %>
-        <%= link_to "削除する", tweet_path(t.id), method: :delete %>
-      <% elsif current_user.admin? %>
-        <%= link_to "管理者用編集", edit_tweet_path(t.id) %>
-        <%= link_to "管理者用削除", tweet_path(t.id), method: :delete %>
-      <% end %>
-
-      <% if current_user.admin? %>
-       <%= link_to "秘密のページへ", users_path %>
-      <% end %>
-
-    <% else %>
-      <i class="fa-solid fa-heart"></i><%= t.likes.count %>
+  <%# --- 2. 検索・フィルターエリア --- %>
+  <div class="search-section">
+    <%= form_with(url: tweets_path, method: :get, local: true, class: "search-form") do |f| %>
+      <%= f.text_field :search, placeholder: "キーワードで検索...", class: "search-input" %>
+      <%= f.submit "検索する", class: "search-submit" %>
     <% end %>
+  </div>
 
-      <%= t.category %>
-      <%= t.user&.email %>
-      <%= link_to "詳細へ", tweet_path(t.id) %>
-      <%= link_to "編集する", edit_tweet_path(t.id) %>
-      <%= button_to "削除する", tweet_path(t.id), method: :delete %>
+  <%# 管理者用隠しリンク %>
+  <% if user_signed_in? && current_user.admin? %>
+    <div style="text-align: center; margin-bottom: 20px;">
+      <%= link_to "🔧 ユーザー管理（管理者用）", users_path, class: "admin-link" %>
     </div>
   <% end %>
+
+  <%# --- 3. タイムライン（カード一覧） --- %>
+  <div class="tweets-grid">
+    <% @tweets.each do |t| %>
+      <div class="tweet-card">
+        <div class="tweet-card-inner">
+          
+          <%# ユーザー情報 %>
+          <div class="tweet-user-info">
+            <span class="user-badge"><%= t.category.presence || "MEMBER" %></span>
+            <span class="user-email"><%= t.user&.email %></span>
+          </div>
+
+          <%# メディア（動画・画像） %>
+          <div class="tweet-media">
+            <%= video_tag t.video_url, controls: true, class: "tweet-video" if t.video? %>
+            <% if t.image.attached? %>
+              <%= image_tag t.image, class: "tweet-image" %>
+            <% end %>
+          </div>
+          
+          <%# コンテンツ %>
+          <div class="tweet-content">
+            <h3 class="tweet-title"><%= t.title %></h3>
+            <p><%= t.about %></p>
+          </div>
+
+          <%# いいね ＆ アクション %>
+          <div class="tweet-footer">
+            <div class="like-section">
+              <% if user_signed_in? %>
+                <% if current_user.already_liked?(t) %>
+                  <%= link_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete, class: "like-btn active" do %>
+                    <i class="fa-solid fa-heart"></i> <%= t.likes.count %>
+                  <% end %>
+                <% else %>
+                  <%= link_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post, class: "like-btn" do %>
+                    <i class="fa-regular fa-heart"></i> <%= t.likes.count %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <span class="like-btn"><i class="fa-solid fa-heart"></i> <%= t.likes.count %></span>
+              <% end %>
+            </div>
+
+            <div class="tweet-actions">
+              <%= link_to '詳細へ', tweet_path(t.id), class: "action-link" %>
+              
+              <% if user_signed_in? %>
+                <% if current_user.id == t.user_id || current_user.admin? %>
+                  <%= link_to "編集", edit_tweet_path(t.id), class: "action-link" %>
+                  <%= link_to "削除", tweet_path(t.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "action-link delete" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="tweet-date-footer">
+            <%= t.created_at.strftime("%Y.%m.%d") %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
