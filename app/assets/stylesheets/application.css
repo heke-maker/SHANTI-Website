@@ -792,26 +792,58 @@ main { width: 100%; padding: 0 !important; }
 }
 
 /* =================================================== */
-/* 14. BLOG FORM (カレンダー投稿画面用) */
+/* 14. BLOG FORM (日時選択のプルダウン調整) */
 /* =================================================== */
 
-.time-select-wrapper select {
-    padding: 10px;
-    border: 2px solid #f0f0f0;
-    border-radius: 8px;
-    margin-right: 5px;
+/* 日時選択のプルダウンを横並びに整列させる */
+.time-select-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
     background: #fafafa;
+    padding: 10px;
+    border-radius: 12px;
+    border: 2px solid #f0f0f0;
 }
 
+/* プルダウン単体のデザイン */
+.time-select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #444;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+/* プルダウンをクリックした時のオレンジ色 */
+.time-select:focus {
+    border-color: var(--color-main);
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 107, 53, 0.2);
+}
+
+/* =================================================== */
+/* 15. RESPONSIVE (スマホでのカレンダー崩れ防止) */
+/* =================================================== */
+
 @media (max-width: 768px) {
+    /* カレンダーの1マスの高さをスマホ向けに調整 */
     .simple-calendar td {
         height: 80px;
         padding: 5px;
     }
+    /* スマホで文字がはみ出さないように小さくする */
     .calendar-event-link {
         font-size: 0.6rem;
     }
     .calendar-day-num {
         font-size: 0.7rem;
+    }
+    /* フォームのパディングも少し詰める */
+    .blog-card {
+        padding: 30px 20px;
     }
 }

@@ -1,23 +1,45 @@
-<%= form_with(model: @blog, local: true) do |form| %>
+<div class="blog-form-container">
+  <div class="blog-card">
+    <div class="blog-header">
+      <span class="form-badge">SCHEDULE</span>
+      <h1>予定を追加する</h1>
+    </div>
 
-  <div class="title">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form_with(model: @blog, local: true, class: "styled-form") do |form| %>
+      
+      <%# タイトル入力 %>
+      <div class="field">
+        <%= form.label :title, "イベント名" %>
+        <%= form.text_field :title, class: "form-input", placeholder: "例：秋のチャリティーフットサル大会" %>
+      </div>
+
+      <%# 日時選択 %>
+      <div class="field">
+        <%= form.label :start_time, "開催日時" %>
+        <div class="time-select-wrapper">
+          <%# 以前定義したCSSクラス time-select を適用 %>
+          <%= form.datetime_select :start_time, 
+              { use_month_numbers: true, date_separator: ' / ', datetime_separator: ' — ' }, 
+              { class: "time-select" } %>
+        </div>
+      </div>
+
+      <%# 内容詳細 %>
+      <div class="field">
+        <%= form.label :content, "活動詳細・備考" %>
+        <%= form.text_area :content, class: "form-textarea", rows: 5, placeholder: "集合場所、持ち物、活動の目的など" %>
+      </div>
+
+      <%# 送信ボタン %>
+      <div class="actions">
+        <%= form.submit "カレンダーに登録する", class: "form-submit-btn" %>
+      </div>
+
+      <%# 戻るリンク %>
+      <div class="form-footer-links">
+        <%= link_to "← カレンダーに戻る", blogs_path %>
+      </div>
+
+    <% end %>
   </div>
-
-    <div class="time">
-    <%= form.label :start_time %>
-    <%= form.datetime_select :start_time %>
-  </div>
-  
-  <div class="content">
-    <%= form.label :content %>
-    <%= form.text_field :content %>
-  </div>
-
-
-  <div class="submit">
-    <%= form.submit %>
-  </div>
-
-<% end %>
+</div>
