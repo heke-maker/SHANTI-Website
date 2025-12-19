@@ -924,3 +924,108 @@ main { width: 100%; padding: 0 !important; }
 .auth-footer-links a:hover {
     color: var(--color-main);
 }
+
+
+/* --- 投稿ボタンのデザイン改善 --- */
+.post-action-area {
+    margin: 30px 0;
+    text-align: left;
+}
+
+.main-post-btn {
+    display: inline-block;
+    background: var(--color-main);
+    color: white !important;
+    text-decoration: none !important;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+    transition: all 0.3s ease;
+}
+
+.main-post-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 107, 53, 0.4);
+    background: #ff8558; /* ホバー時に少し明るく */
+}
+
+.delete-link {
+    color: #ff4444 !important;
+    margin-left: 15px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+/* --- いいねボタンの見た目とアニメーション --- */
+.like-btn {
+    text-decoration: none;
+    color: #888;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* いいね済み（アクティブ）の時の赤色 */
+.like-btn.active {
+    color: #ff4444 !important;
+}
+
+.like-btn:hover {
+    transform: scale(1.1);
+}
+
+.like-btn i {
+    font-size: 1.2rem;
+}
+
+/* 投稿ボタンのデザイン */
+.post-action-area {
+    margin: 30px 0;
+}
+
+.main-post-btn {
+    display: inline-block;
+    background: var(--color-main);
+    color: white !important;
+    text-decoration: none !important;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+    transition: 0.3s ease;
+}
+
+.main-post-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 107, 53, 0.4);
+}
+
+/* いいねボタンのアニメーション */
+.like-btn {
+    text-decoration: none;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.2s;
+}
+
+.like-btn.active {
+    color: #ff4444 !important;
+}
+
+.like-btn:hover {
+    transform: scale(1.1);
+}
+
+/* 削除リンク */
+.delete-link {
+    color: #ff4444 !important;
+    margin-left: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}

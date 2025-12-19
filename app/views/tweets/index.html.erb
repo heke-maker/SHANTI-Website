@@ -1,76 +1,76 @@
 <div class="tweets-timeline-container">
-  <%# --- ヘッダーエリア --- %>
   <div class="tweets-header">
-    <div class="header-badge">COMMUNITY</div>
+    <span class="header-badge">COMMUNITY</span>
     <h1>みんなの活動メモ</h1>
     <p>日々の活動の様子や、参加した感想をシェアしよう！</p>
-    <%= link_to '新しく投稿する', new_tweet_path, class: "new-post-btn" %>
-  </div>
-
-  <%# --- 検索エリア --- %>
-  <div class="search-section">
-    <%= form_with(url: tweets_path, method: :get, local: true, class: "search-form") do |f| %>
-      <%= f.text_field :search, placeholder: "キーワードで検索...", class: "search-input" %>
-      <%= f.button type: "submit", class: "search-submit" do %>
-        <i class="fa-solid fa-magnifying-glass"></i>
+    
+    <%# --- 投稿ボタン：オレンジの大きなデザイン --- %>
+    <div class="post-action-area">
+      <%= link_to new_tweet_path, class: "main-post-btn" do %>
+        <i class="fas fa-plus-circle"></i> 新しく投稿する
       <% end %>
-    <% end %>
+    </div>
+
+    <div class="search-box">
+      <%= form_tag(tweets_path, method: :get, class: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "キーワードで検索...", id: "tweet-search" %>
+        <%= submit_tag '検索', name: nil, class: "search-submit" %>
+      <% end %>
+    </div>
   </div>
 
-  <%# --- 吹き出しタイムライン --- %>
   <div class="balloon-timeline">
-    <% @tweets.each_with_index do |t, index| %>
-      <%# 左右交互に配置するためのクラス分け %>
-      <div class="tweet-wrapper <%= index.odd? ? 'reverse' : '' %>">
-        
-        <%# ユーザーアイコン（仮） %>
+    <% @tweets.each_with_index do |tweet, index| %>
+      <div class="tweet-wrapper <%= 'reverse' if index.odd? %>">
         <div class="user-icon-circle">
-          <%= t.user.email[0].upcase %>
+          <%= tweet.user.email[0].upcase %>
         </div>
-
-        <%# 吹き出し本体 %>
+        
         <div class="tweet-balloon">
+          <div class="balloon-tail"></div>
           <div class="tweet-meta">
-            <span class="user-name"><%= t.user.email.split('@')[0] %></span>
-            <span class="category-tag"><%= t.category %></span>
+            <span class="user-name"><%= tweet.user.email.split('@')[0] %></span>
+            <span class="category-tag"><%= tweet.category %></span>
           </div>
-
+          
+          <h3 class="tweet-title"><%= tweet.title %></h3>
+          <p class="tweet-text"><%= tweet.about %></p>
+          
           <div class="tweet-media">
-            <%= video_tag t.video_url, controls: true, class: "tweet-video" if t.video? %>
-            <%= image_tag t.image, class: "tweet-image" if t.image.attached? %>
-          </div>
-
-          <div class="tweet-body">
-            <h3 class="tweet-title"><%= t.title %></h3>
-            <p><%= t.about %></p>
+            <% if tweet.image.attached? %>
+              <%= image_tag tweet.image %>
+            <% end %>
+            <% if tweet.video.present? %>
+              <%= video_tag tweet.video_url, controls: true, width: "100%" %>
+            <% end %>
           </div>
 
           <div class="tweet-footer">
+            <%# --- いいね機能：モデルの liked_users を利用 --- %>
             <div class="like-section">
               <% if user_signed_in? %>
-                <% if current_user.already_liked?(t) %>
-                  <%= link_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete, class: "like-btn active" do %>
-                    <i class="fa-solid fa-heart"></i><span><%= t.likes.count %></span>
+                <% if tweet.liked_users.include?(current_user) %>
+                  <%= link_to tweet_likes_path(tweet), method: :delete, class: "like-btn active" do %>
+                    <i class="fas fa-heart"></i> <span class="count"><%= tweet.likes.count %></span>
                   <% end %>
                 <% else %>
-                  <%= link_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post, class: "like-btn" do %>
-                    <i class="fa-regular fa-heart"></i><span><%= t.likes.count %></span>
+                  <%= link_to tweet_likes_path(tweet), method: :post, class: "like-btn" do %>
+                    <i class="far fa-heart"></i> <span class="count"><%= tweet.likes.count %></span>
                   <% end %>
                 <% end %>
               <% else %>
-                <i class="fa-solid fa-heart"></i> <%= t.likes.count %>
+                <i class="far fa-heart"></i> <span class="count"><%= tweet.likes.count %></span>
               <% end %>
             </div>
-            
+
+            <%# --- アクションリンク --- %>
             <div class="tweet-actions">
-              <%= link_to "詳細", tweet_path(t.id) %>
-              <% if user_signed_in? && (current_user.id == t.user_id || current_user.admin?) %>
-                <%= link_to "編集", edit_tweet_path(t.id) %>
-                <%= link_to "削除", tweet_path(t.id), method: :delete, data: { confirm: '消去しますか？' } %>
+              <%= link_to "詳細", tweet_path(tweet) %>
+              <% if user_signed_in? && tweet.user_id == current_user.id %>
+                <%= link_to "削除", tweet_path(tweet), method: :delete, data: { confirm: "この投稿を削除しますか？" }, class: "delete-link" %>
               <% end %>
             </div>
           </div>
-          <div class="balloon-tail"></div>
         </div>
       </div>
     <% end %>

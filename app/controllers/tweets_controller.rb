@@ -1,58 +1,38 @@
 class TweetsController < ApplicationController
-
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    if params[:search] == nil
-        @tweets= Tweet.all
-      elsif params[:search] == ''
-        @tweets= Tweet.all
-      else
-        @tweets = Tweet.where("about LIKE ? ",'%' + params[:search] + '%')
-      end
-  end
-
-  def new
-    @tweet = Tweet.new
+    if params[:search].blank?
+      @tweets = Tweet.all.order(created_at: :desc)
+    else
+      @tweets = Tweet.where("about LIKE ?", '%' + params[:search] + '%').order(created_at: :desc)
+    end
   end
 
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user_id = current_user.id
 
-    if @tweet.save!
-      redirect_to :action => "index"
+    if @tweet.save
+      redirect_to tweets_path, notice: "投稿しました！"
     else
-      redirect_to :action => "new"
-    end
-  end
-
-  def show
-    @tweet = Tweet.find(params[:id])
-  end
-
-  def edit
-    @tweet = Tweet.find(params[:id])
-  end
-
-  def update
-    @tweet = Tweet.find(params[:id])
-    if @tweet.update(tweet_params)
-      redirect_to :action => "show", :id => @tweet.id
-    else
-      redirect_to :action => "new"
+      render :new
     end
   end
 
   def destroy
     tweet = Tweet.find(params[:id])
-    tweet.destroy
-    redirect_to action: :index
+    if tweet.user_id == current_user.id
+      tweet.destroy
+      redirect_to tweets_path, notice: "削除が完了しました"
+    else
+      redirect_to tweets_path, alert: "権限がありません"
+    end
   end
 
   private
+
   def tweet_params
     params.require(:tweet).permit(:title, :about, :category, :image, :video)
   end
-
 end
