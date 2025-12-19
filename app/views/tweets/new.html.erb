@@ -6,6 +6,7 @@
       <p>今日の活動や、みんなに伝えたいことを自由に書きましょう！</p>
     </div>
 
+    <%# urlの指定を削除し、modelのみにすることで送信先エラーを解消します %>
     <%= form_with(model: @tweet, local: true, class: "styled-form") do |f| %>
       
       <div class="field">
@@ -15,7 +16,7 @@
 
       <div class="field">
         <%= f.label :category, "カテゴリー" %>
-        <%= f.select :category, [["ボランティア", "VOLUNTEER"], ["イベント", "STUDY"], ["メンバー", "EVENT"], ["その他", "OTHER"]], { include_blank: "選択してください" }, { class: "form-select" } %>
+        <%= f.select :category, [["ボランティア", "ボランティア"], ["イベント", "イベント"], ["勉強会", "勉強会"], ["その他", "その他"]], { include_blank: "選択してください" }, { class: "form-select" } %>
       </div>
 
       <div class="field">
@@ -30,8 +31,9 @@
         </div>
         
         <div class="field">
-          <%= f.label :video, "動画のURL" %>
-          <%= f.text_field :video_url, placeholder: "https://...", class: "form-input" %>
+          <%= f.label :video, "動画を選択" %>
+          <%# 動画もファイルとして送る形式に修正（VideoUploaderを使用しているため） %>
+          <%= f.file_field :video, class: "form-file" %>
         </div>
       </div>
 
