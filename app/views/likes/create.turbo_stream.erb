@@ -1,0 +1,4 @@
+<%# IDが一致する場所だけを書き換える %>
+<%= turbo_stream.replace "like-btn-#{@tweet.id}" do %>
+  <%= render 'likes/like', tweet: @tweet %>
+<% end %>

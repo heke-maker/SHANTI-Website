@@ -1,29 +1,58 @@
-<h1>GeekTwitter</h1>
-<h3>Tweet詳細</h3>
-<div class="tweet">
-  <p><%= @tweet.about %></p>
-  <p><%= @tweet.created_at %></p>
-    <% if user_signed_in? %>
-      <% if current_user.already_liked?(@tweet) %>
-        <%= button_to tweet_like_path(@tweet), method: :delete do %>
-            <i class="fa-solid fa-heart"></i><%= @tweet.likes.count %>
-        <% end %>
+<div class="activity-detail-container">
+  <div class="detail-hero">
+    <div class="detail-hero-overlay">
+      <% if @tweet.image.attached? %>
+        <%= image_tag @tweet.image %>
       <% else %>
-        <%= button_to tweet_likes_path(@tweet), method: :post do %>
-            <i class="fa-solid fa-heart"></i><%= @tweet.likes.count %>
-        <% end %>
+        <div class="no-image-placeholder">SHANTI COMMUNITY</div>
       <% end %>
-    <% else %>
-        <i class="fa-solid fa-heart"></i><%= @tweet.likes.count %>
+    </div>
+    <div class="detail-hero-content">
+      <span class="detail-badge"><%= @tweet.category %></span>
+      <h1 class="detail-main-title"><%= @tweet.title %></h1>
+    </div>
+  </div>
+
+  <div class="detail-main-body">
+    <div class="detail-header-meta">
+      <div class="user-info">
+        <div class="user-icon-circle-sm"><%= @tweet.user.email[0].upcase %></div>
+        <span class="user-name"><%= @tweet.user.email.split('@')[0] %></span>
+      </div>
+      <div class="post-date"><%= @tweet.created_at.strftime('%Y/%m/%d') %></div>
+    </div>
+
+    <div class="detail-description">
+      <%= simple_format(@tweet.about) %>
+    </div>
+
+    <% if @tweet.video.present? %>
+      <div class="detail-video">
+        <%= video_tag @tweet.video_url, controls: true, width: "100%" %>
+      </div>
     <% end %>
-  <%= link_to "編集する", edit_tweet_path(@tweet.id) %>
+
+    <div class="detail-footer">
+      <%# --- いいねボタン（IDを指定して部分更新できるようにする） --- %>
+      <div id="like-btn-<%= @tweet.id %>" class="like-section-large">
+        <%= render 'likes/like', tweet: @tweet %>
+      </div>
+
+      <div class="detail-actions">
+        <%= link_to tweets_path, class: "back-btn" do %>
+          <i class="fas fa-arrow-left"></i> 一覧へ戻る
+        <% end %>
+
+        <% if user_signed_in? && @tweet.user_id == current_user.id %>
+          <div class="owner-actions">
+            <%= link_to "編集する", edit_tweet_path(@tweet), class: "edit-btn" %>
+            <%# 削除ボタンを確実に動かすために data-turbo-method を使用 %>
+            <%= link_to "削除する", tweet_path(@tweet), 
+                        data: { turbo_method: :delete, turbo_confirm: "本当にこの投稿を削除しますか？" }, 
+                        class: "delete-btn-text" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<h2>いいねしたユーザー</h2>
-<% @tweet.liked_users.each do |user| %>
-  <li><%= user.email %></li>
-<% end %>
-
-<%= link_to "Tweet一覧に戻る", tweets_path %>
-
-<%= link_to "編集する", edit_tweet_path(@tweet.id) %>

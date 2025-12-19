@@ -1,14 +1,22 @@
 class LikesController < ApplicationController
-
   def create
-    like = current_user.likes.create(tweet_id: params[:tweet_id]) #user_idとtweet_idの二つを代入
-    redirect_back(fallback_location: root_path)
+    @tweet = Tweet.find(params[:tweet_id])
+    like = current_user.likes.create(tweet_id: params[:tweet_id])
+    
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.turbo_stream # これで瞬時に切り替わります
+    end
   end
 
   def destroy
-    like = Like.find_by(tweet_id: params[:tweet_id], user_id: current_user.id)
+    @tweet = Tweet.find(params[:tweet_id])
+    like = current_user.likes.find_by(tweet_id: params[:tweet_id])
     like.destroy
-    redirect_back(fallback_location: root_path)
-  end
 
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.turbo_stream
+    end
+  end
 end
