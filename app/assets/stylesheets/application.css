@@ -847,3 +847,80 @@ main { width: 100%; padding: 0 !important; }
         padding: 30px 20px;
     }
 }
+
+/* =================================================== */
+/* 15. AUTH DESIGN (ログイン・新規登録専用) */
+/* =================================================== */
+
+/* 背景をオレンジのグラデーションにして中央寄せにする */
+.auth-page-container {
+    padding: 140px 5% 80px;
+    background: linear-gradient(135deg, var(--color-accent) 0%, #ffffff 50%, var(--color-accent) 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* 白いカードのデザイン */
+.auth-card {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    padding: 50px 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(255, 107, 53, 0.15);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-header h1 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--color-main);
+    letter-spacing: 1px;
+}
+
+/* 共通の入力ボタン（オレンジ） */
+.auth-submit-btn {
+    background: var(--color-main);
+    color: white !important;
+    border: none;
+    padding: 15px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    box-shadow: 0 10px 20px rgba(255, 107, 53, 0.2);
+    margin-top: 10px;
+}
+
+.auth-submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 107, 53, 0.3);
+    background: #ff8558;
+}
+
+.auth-footer-links {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.auth-footer-links a {
+    color: #888;
+    text-decoration: none;
+    transition: 0.2s;
+    display: inline-block;
+    margin: 5px 10px;
+}
+
+.auth-footer-links a:hover {
+    color: var(--color-main);
+}

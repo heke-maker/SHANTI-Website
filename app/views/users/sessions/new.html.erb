@@ -1,29 +1,33 @@
-<div class="auth-container">
+<div class="auth-page-container">
   <div class="auth-card">
-    <h2>ログイン</h2>
+    <div class="auth-header">
+      <h1>ログイン</h1>
+    </div>
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="auth-field">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@mail.com" %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "styled-form" }) do |f| %>
+      <div class="field">
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input" %>
       </div>
 
-      <div class="auth-field">
-        <%= f.label :password %>
-        <%= f.password_field :password, autocomplete: "current-password" %>
+      <div class="field">
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-input" %>
       </div>
 
       <% if devise_mapping.rememberable? %>
-        <div class="remember-me">
+        <div class="field" style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px;">
           <%= f.check_box :remember_me %>
-          <%= f.label :remember_me, "ログイン状態を保存する" %>
+          <%= f.label :remember_me, "ログイン状態を保存する", style: "margin-bottom: 0;" %>
         </div>
       <% end %>
 
-      <%= f.submit "ログイン", class: "auth-submit-btn" %>
+      <div class="actions">
+        <%= f.submit "ログイン", class: "auth-submit-btn" %>
+      </div>
     <% end %>
 
-    <div class="auth-links">
+    <div class="auth-footer-links">
       <%= render "devise/shared/links" %>
     </div>
   </div>
