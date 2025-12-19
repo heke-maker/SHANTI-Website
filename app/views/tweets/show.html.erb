@@ -1,58 +1,78 @@
 <div class="activity-detail-container">
-  <div class="detail-hero">
-    <div class="detail-hero-overlay">
-      <% if @tweet.image.attached? %>
-        <%= image_tag @tweet.image %>
-      <% else %>
-        <div class="no-image-placeholder">SHANTI COMMUNITY</div>
+  <% if @tweet.present? %>
+    <div class="detail-hero">
+      <div class="detail-hero-overlay">
+        <% if @tweet.image.attached? %>
+          <%= image_tag @tweet.image %>
+        <% else %>
+          <div class="no-image-placeholder">SHANTI COMMUNITY</div>
+        <% end %>
+      </div>
+      <div class="detail-hero-content">
+        <span class="detail-badge"><%= @tweet.category %></span>
+        <h1 class="detail-main-title"><%= @tweet.title %></h1>
+      </div>
+    </div>
+
+    <div class="detail-main-body">
+      <div class="detail-header-meta">
+        <div class="user-info">
+          <div class="user-icon-circle-sm"><%= @tweet.user.email[0].upcase %></div>
+          <span class="user-name"><%= @tweet.user.email.split('@')[0] %></span>
+        </div>
+        <div class="post-date"><%= @tweet.created_at.strftime('%Y/%m/%d') %></div>
+      </div>
+
+      <div class="detail-description">
+        <%# カラム名が about の場合 %>
+        <%= simple_format(@tweet.about) %>
+      </div>
+
+      <% if @tweet.video.present? %>
+        <div class="detail-video">
+          <%= video_tag @tweet.video_url, controls: true, width: "100%" %>
+        </div>
       <% end %>
-    </div>
-    <div class="detail-hero-content">
-      <span class="detail-badge"><%= @tweet.category %></span>
-      <h1 class="detail-main-title"><%= @tweet.title %></h1>
-    </div>
-  </div>
 
-  <div class="detail-main-body">
-    <div class="detail-header-meta">
-      <div class="user-info">
-        <div class="user-icon-circle-sm"><%= @tweet.user.email[0].upcase %></div>
-        <span class="user-name"><%= @tweet.user.email.split('@')[0] %></span>
-      </div>
-      <div class="post-date"><%= @tweet.created_at.strftime('%Y/%m/%d') %></div>
-    </div>
+      <div class="detail-footer">
+        <%# --- いいねボタン（Ajax/Turbo Stream対応のID付与） --- %>
+        <div id="like-btn-<%= @tweet.id %>" class="like-section-large">
+          <% if user_signed_in? %>
+            <% if @tweet.liked_by?(current_user) %>
+              <%= link_to tweet_likes_path(@tweet), data: { turbo_method: :delete }, class: "like-btn active" do %>
+                <i class="fas fa-heart"></i> <span class="count"><%= @tweet.likes.count %></span>
+              <% end %>
+            <% else %>
+              <%= link_to tweet_likes_path(@tweet), data: { turbo_method: :post }, class: "like-btn" do %>
+                <i class="far fa-heart"></i> <span class="count"><%= @tweet.likes.count %></span>
+              <% end %>
+            <% end %>
+          <% else %>
+            <i class="far fa-heart"></i> <span class="count"><%= @tweet.likes.count %></span>
+          <% end %>
+        </div>
 
-    <div class="detail-description">
-      <%= simple_format(@tweet.about) %>
-    </div>
+        <div class="detail-actions">
+          <%= link_to tweets_path, class: "back-btn" do %>
+            <i class="fas fa-arrow-left"></i> 一覧へ戻る
+          <% end %>
 
-    <% if @tweet.video.present? %>
-      <div class="detail-video">
-        <%= video_tag @tweet.video_url, controls: true, width: "100%" %>
-      </div>
-    <% end %>
-
-    <div class="detail-footer">
-      <%# --- いいねボタン（IDを指定して部分更新できるようにする） --- %>
-      <div id="like-btn-<%= @tweet.id %>" class="like-section-large">
-        <%= render 'likes/like', tweet: @tweet %>
-      </div>
-
-      <div class="detail-actions">
-        <%= link_to tweets_path, class: "back-btn" do %>
-          <i class="fas fa-arrow-left"></i> 一覧へ戻る
-        <% end %>
-
-        <% if user_signed_in? && @tweet.user_id == current_user.id %>
-          <div class="owner-actions">
-            <%= link_to "編集する", edit_tweet_path(@tweet), class: "edit-btn" %>
-            <%# 削除ボタンを確実に動かすために data-turbo-method を使用 %>
-            <%= link_to "削除する", tweet_path(@tweet), 
-                        data: { turbo_method: :delete, turbo_confirm: "本当にこの投稿を削除しますか？" }, 
-                        class: "delete-btn-text" %>
-          </div>
-        <% end %>
+          <% if user_signed_in? && @tweet.user_id == current_user.id %>
+            <div class="owner-actions">
+              <%= link_to "編集する", edit_tweet_path(@tweet), class: "edit-btn" %>
+              <%# 削除を確実に動かすための data-turbo-method %>
+              <%= link_to "削除する", tweet_path(@tweet), 
+                          data: { turbo_method: :delete, turbo_confirm: "本当にこの投稿を削除しますか？" }, 
+                          class: "delete-btn-text" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
+  <% else %>
+    <div class="detail-main-body">
+      <p>投稿が見つかりませんでした。</p>
+      <%= link_to "一覧に戻る", tweets_path, class: "back-btn" %>
+    </div>
+  <% end %>
 </div>

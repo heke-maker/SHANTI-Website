@@ -30,6 +30,10 @@ class TweetsController < ApplicationController
     end
   end
 
+  def show
+    @tweet = Tweet.find(params[:id]) # この1行が必須です
+  end
+
   private
 
   def tweet_params

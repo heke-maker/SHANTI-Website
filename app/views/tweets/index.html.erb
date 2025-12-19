@@ -11,6 +11,7 @@
       <% end %>
     </div>
 
+    <%# --- 検索フォーム --- %>
     <div class="search-box">
       <%= form_tag(tweets_path, method: :get, class: "search-form") do %>
         <%= text_field_tag :search, params[:search], placeholder: "キーワードで検索...", id: "tweet-search" %>
@@ -46,15 +47,17 @@
           </div>
 
           <div class="tweet-footer">
-            <%# --- いいね機能：モデルの liked_users を利用 --- %>
-            <div class="like-section">
+            <%# --- いいね機能：Turbo Streamによる即時反映に対応 --- %>
+            <div id="like-btn-<%= tweet.id %>" class="like-section">
               <% if user_signed_in? %>
-                <% if tweet.liked_users.include?(current_user) %>
-                  <%= link_to tweet_likes_path(tweet), method: :delete, class: "like-btn active" do %>
+                <% if tweet.liked_by?(current_user) %>
+                  <%# DELETE送信を確実に認識させる data-turbo-method %>
+                  <%= link_to tweet_likes_path(tweet), data: { turbo_method: :delete }, class: "like-btn active" do %>
                     <i class="fas fa-heart"></i> <span class="count"><%= tweet.likes.count %></span>
                   <% end %>
                 <% else %>
-                  <%= link_to tweet_likes_path(tweet), method: :post, class: "like-btn" do %>
+                  <%# POST送信を確実に認識させる data-turbo-method %>
+                  <%= link_to tweet_likes_path(tweet), data: { turbo_method: :post }, class: "like-btn" do %>
                     <i class="far fa-heart"></i> <span class="count"><%= tweet.likes.count %></span>
                   <% end %>
                 <% end %>
@@ -67,7 +70,10 @@
             <div class="tweet-actions">
               <%= link_to "詳細", tweet_path(tweet) %>
               <% if user_signed_in? && tweet.user_id == current_user.id %>
-                <%= link_to "削除", tweet_path(tweet), method: :delete, data: { confirm: "この投稿を削除しますか？" }, class: "delete-link" %>
+                <%# 削除を確実に実行させる data-turbo-method %>
+                <%= link_to "削除", tweet_path(tweet), 
+                            data: { turbo_method: :delete, turbo_confirm: "この投稿を削除しますか？" }, 
+                            class: "delete-link" %>
               <% end %>
             </div>
           </div>
