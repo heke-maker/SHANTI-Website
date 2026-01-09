@@ -65,7 +65,7 @@ gem 'carrierwave', '~> 3.0'
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
 gem 'mimemagic', '~> 0.4.3'
-gem 'simple_calendar', '~> 2.0'
+gem 'simple_calendar', '~> 3.1'
 
 gem 'sassc-rails'
 
